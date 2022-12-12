@@ -1,0 +1,6 @@
+@mixin label($color: var(--labelColor), $size: 1rem, $weight: 400, $lh: 1) {
+  font-weight: $weight;
+  font-size: $size;
+  color: $color;
+  line-height: $lh;
+}

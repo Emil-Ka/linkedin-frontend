@@ -1,0 +1,19 @@
+@import '../../../design/fonts.scss';
+
+.label {
+  @include label($weight: 500);
+  margin-bottom: 12px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--borderInputColor);
+  border-radius: 6px;
+  padding: 10px 12px 10px;
+  background: var(--inputBg);
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--borderInputColorFocus);
+  }
+}

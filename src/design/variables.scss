@@ -1,0 +1,15 @@
+:root, :root[data-theme="light"] {
+  --bgColor: #F7F9FB;
+  --borderInputColor: #E9E9E9;
+  --borderInputColorFocus: #a4a4a4;
+  --formBg: #fff;
+  --inputBg: #F4F4F4;
+  --labelColor: #494949;
+}
+
+:root[data-theme="dark"] {
+  --bgColor: #F7F9FB;
+  --borderInputColor: #E9E9E9;
+  --formBg: #000;
+  --inputBg: #F4F4F4;
+}
