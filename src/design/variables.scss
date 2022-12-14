@@ -1,4 +1,36 @@
+:root {
+  --primaryColor: #1B1B1B;
+  --secondaryColor: #ffffff;
+  --blueColor: #00539F;
+  --nevaColor: #0276B2;
+  --errorColor: #CD252F;
+  --silverColor: #767676;
+  --grayColor: #494949;
+
+  // FONT SIZES
+  --font-s: 0.75rem; //12px
+  --font-m: 0.8125rem; //13px
+  --font-l: 0.875rem; //14px
+  --font-xl: 0.9375rem //15px
+  --font-xxl: 1rem; //16px
+  --font-h4: 1.125rem; //18px
+  --font-h3: 1.5rem; //24px
+  --font-h2: 1.875rem; //30px
+  --font-h1: 2.75rem; //44px
+
+  --font-size-title-1: var(--font-h1);
+  --font-size-title-2: var(--font-h2);
+  --font-size-title-3: var(--font-h3);
+  --font-size-title-4: var(--font-h4);
+  --font-size-headline: var(--font-xxl);
+  --font-size-text: var(--font-xl);
+  --font-size-subhead: var(--font-l);
+  --font-size-caption-1: var(--font-m);
+  --font-size-caption-2: var(--font-l);
+}
+
 :root, :root[data-theme="light"] {
+  --placeholderColor: #8D8D8D;
   --bgColor: #F7F9FB;
   --borderInputColor: #E9E9E9;
   --borderInputColorFocus: #a4a4a4;
@@ -8,6 +40,7 @@
 }
 
 :root[data-theme="dark"] {
+  --placeholderColor: #8D8D8D;
   --bgColor: #F7F9FB;
   --borderInputColor: #E9E9E9;
   --formBg: #000;

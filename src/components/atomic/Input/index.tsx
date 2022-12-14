@@ -1,34 +1,46 @@
-import React, { FC, ForwardedRef, forwardRef } from 'react';
+import React, {
+  ForwardedRef, forwardRef, useId, useState,
+} from 'react';
 import cn from 'classnames';
 
 import { InputProps } from './input.props';
-import { useFormContext } from '../../../hooks';
+import EyeIcon from './assets/eye.svg';
 
 import styles from './input.module.scss';
 
-export const Input = ({
-  className,
-  error,
-  name,
-  label,
-  ...props
-}: InputProps) => {
-  const { register } = useFormContext();
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className, error, label, type, ...props
+    },
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    const id = useId();
+    const [inputType, setInputType] = useState(type);
 
-  return (
-    <div className={styles.wrapper}>
-      {label && (
-        <label htmlFor={name} className={styles.label}>
+    const changeInputType = () => {
+      setInputType((type) => (type === 'password' ? 'text' : 'password'));
+    };
+
+    return (
+      <div className={styles.wrapper}>
+        {label && (
+        <label htmlFor={id} className={styles.label}>
           {label}
         </label>
-      )}
-      <input
-        id={name}
-        className={cn(styles.input, className)}
-        {...register(name)}
-        {...props}
-      />
-      {error && <span className={styles.error}>{error.message}</span>}
-    </div>
-  );
-};
+        )}
+        <div className={styles.inputWrapper}>
+          <input
+            id={id}
+            ref={ref}
+            type={inputType}
+            className={cn(styles.input, className)}
+            {...props}
+          />
+          {type === 'password' && <EyeIcon onClick={changeInputType} className={styles.eyeIcon} />}
+        </div>
+        {error && <span className={styles.error}>{error.message}</span>}
+      </div>
+    );
+  },
+);

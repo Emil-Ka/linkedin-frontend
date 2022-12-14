@@ -1,0 +1,19 @@
+@import '../../../design/fonts.scss';
+
+.label {
+  @include text-medium($color: var(--secondaryColor))
+}
+
+.button {
+  background: var(--blueColor);
+  opacity: .9;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: opacity .2s ease-out;
+
+  &:hover {
+    opacity: 1;
+  }
+}
