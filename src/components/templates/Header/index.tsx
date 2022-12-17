@@ -10,7 +10,7 @@ import styles from './header.module.scss';
 export const Header: FC<HeaderProps> = ({ className, ...props }) => (
   <header className={cn(styles.header, className)} {...props}>
     <Container className={styles.content}>
-      <Logo href="/" className={styles.logo} />
+      <Logo isLink className={styles.logo} />
     </Container>
   </header>
 );

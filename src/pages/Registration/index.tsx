@@ -1,15 +1,20 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import decode from 'jwt-decode';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { bindActionCreators } from '@reduxjs/toolkit';
 
 import {
   Button, Input, CheckBox, Page,
 } from '../../components';
-import { useRegisterMutation } from '../../redux/api/user';
+import { useRegisterMutation, useGetUserQuery } from '../../redux/api/user';
 import { IRegistrationInitData } from './types';
+import { convertApiData } from '../../services/convert-api-data';
+import { setUser, setToken } from '../../redux/slices/user-slice';
+import { IErrorResponse, instanceOfIErrorResponse } from '../../redux/types/user-slice';
+import { useTypedDispatch } from '../../hooks';
 
 import styles from './registration.module.scss';
-import { convertApiData } from '../../services/convert-api-data';
 
 export const initRegistrationState: IRegistrationInitData = {
   first_name: '',
@@ -20,8 +25,16 @@ export const initRegistrationState: IRegistrationInitData = {
 };
 
 export const Registration = () => {
+  const dispatch = useTypedDispatch();
+  const [error, setError] = useState<string[] | null>(null);
+
+  const { setToken: changeToken, setUser: changeUser } = bindActionCreators(
+    { setUser, setToken },
+    dispatch,
+  );
+
   const [registration, {
-    data, isLoading, isError, error,
+    isLoading, isError, error: errorResponse,
   }] = useRegisterMutation();
 
   const { t } = useTranslation();
@@ -36,22 +49,40 @@ export const Registration = () => {
   });
 
   useEffect(() => {
+    if (errorResponse && instanceOfIErrorResponse(errorResponse)) {
+      const newErrors: string[] = [];
+
+      Object.keys(errorResponse.data).forEach((key) => {
+        newErrors.push(...errorResponse.data[key]);
+      });
+
+      setError(newErrors);
+    }
+  }, [errorResponse]);
+
+  useEffect(() => {
     console.log('loading', isLoading);
     console.log('isError', isError);
     console.log('error', error);
-    console.log('data', data);
-  }, [data, error, isLoading, isError]);
+  }, [error, isLoading, isError]);
 
   const onSubmit = async (data: IRegistrationInitData) => {
+    reset();
+
     const payload = await registration(convertApiData.registration(data)).unwrap();
+
+    changeToken({
+      token: payload.access,
+    });
+
     console.log('payload', payload);
     console.log('data', data);
-    reset();
   };
 
   return (
     <Page className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        {error && error.map((error) => <span key={error}>{error}</span>)}
         <Input
           label={t('registration.labels.firstName') || 'Имя'}
           placeholder={t('registration.placeholders.firstName') || 'Иван'}
@@ -71,7 +102,9 @@ export const Registration = () => {
         <Input
           type="email"
           label={t('registration.labels.email') || 'Email'}
-          placeholder={t('registration.placeholders.email') || 'ivan@google.com'}
+          placeholder={
+            t('registration.placeholders.email') || 'ivan@google.com'
+          }
           error={errors.email}
           {...register('email', {
             required: t('registration.error') || 'Ошибка',
@@ -86,7 +119,9 @@ export const Registration = () => {
           })}
         />
         <CheckBox
-          label={t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'}
+          label={
+            t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'
+          }
           {...register('isHr')}
         />
         <Button label={t('registration.buttons.submit')} type="submit" />

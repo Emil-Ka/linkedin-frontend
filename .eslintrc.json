@@ -34,9 +34,10 @@
       "no-shadow": "off",
       "react/jsx-props-no-spreading": "off",
       "react/display-name": "off",
-      "max-len": ["error", { "code": 120 }],
+      "max-len": ["error", { "code": 200 }],
       "react/button-has-type": "off",
-      "@typescript-eslint/no-empty-interface": "off"
+      "@typescript-eslint/no-empty-interface": "off",
+      "no-param-reassign": "off"
     },
     "settings": {
       "import/resolver": {
