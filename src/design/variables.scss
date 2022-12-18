@@ -1,11 +1,23 @@
 :root {
-  --primaryColor: #1B1B1B;
-  --secondaryColor: #ffffff;
+  --whiteColor: #ffffff;
   --blueColor: #00539F;
   --nevaColor: #0276B2;
   --errorColor: #CD252F;
-  --silverColor: #767676;
-  --grayColor: #494949;
+
+  // DARK COLORS
+  --sky-100: #1b1b1b;
+  --sky-90: #323232;
+  --sky-80: #494949;
+  --sky-70: #606060;
+  --sky-60: #767676;
+  --sky-50: #8d8d8d;
+  --sky-40: #a4a4a4;
+  --sky-30: #bbbbbb;
+  --sky-20: #d1d1d1;
+  --sky-10: #e9e9e9;
+  --sky-5: #f4f4f4;
+  --sky-3: #f3f3f3;
+  --sky-0: #ffffff;
 
   // FONT SIZES
   --font-s: 0.75rem; //12px

@@ -1,20 +1,22 @@
 import React, { FC, useEffect, useState } from 'react';
-import decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
 import {
-  Button, Input, CheckBox, Page,
+  Button, Input, CheckBox, Page, Error,
 } from '../../components';
-import { useRegisterMutation, useGetUserQuery } from '../../redux/api/user';
+import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData } from './types';
 import { convertApiData } from '../../services/convert-api-data';
-import { setUser, setToken } from '../../redux/slices/user-slice';
-import { IErrorResponse, instanceOfIErrorResponse } from '../../redux/types/user-slice';
+import { setToken } from '../../redux/slices/user-slice';
+import { instanceOfIErrorResponse } from '../../redux/types/user-slice';
 import { useTypedDispatch } from '../../hooks';
+import { PATHS } from '../routes';
 
 import styles from './registration.module.scss';
+import { setCookie } from '../../models/cookie';
 
 export const initRegistrationState: IRegistrationInitData = {
   first_name: '',
@@ -24,28 +26,22 @@ export const initRegistrationState: IRegistrationInitData = {
   isHr: false,
 };
 
-export const Registration = () => {
+export const Registration: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const [error, setError] = useState<string[] | null>(null);
-
-  const { setToken: changeToken, setUser: changeUser } = bindActionCreators(
-    { setUser, setToken },
-    dispatch,
-  );
-
-  const [registration, {
-    isLoading, isError, error: errorResponse,
-  }] = useRegisterMutation();
-
   const { t } = useTranslation();
+  const [error, setError] = useState<string[] | null>(null);
+  const [registration, { isLoading, error: errorResponse }] = useRegisterMutation();
+
+  const { setToken: changeToken } = bindActionCreators({ setToken }, dispatch);
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     reset,
   } = useForm<IRegistrationInitData>({
-    mode: 'onBlur',
+    mode: 'all',
   });
 
   useEffect(() => {
@@ -60,29 +56,24 @@ export const Registration = () => {
     }
   }, [errorResponse]);
 
-  useEffect(() => {
-    console.log('loading', isLoading);
-    console.log('isError', isError);
-    console.log('error', error);
-  }, [error, isLoading, isError]);
-
   const onSubmit = async (data: IRegistrationInitData) => {
-    reset();
-
     const payload = await registration(convertApiData.registration(data)).unwrap();
+
+    reset();
 
     changeToken({
       token: payload.access,
     });
 
-    console.log('payload', payload);
-    console.log('data', data);
+    setCookie('token', payload.access, 1);
+
+    navigate(PATHS.MAIN);
   };
 
   return (
     <Page className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        {error && error.map((error) => <span key={error}>{error}</span>)}
+        {error && <Error errors={error} />}
         <Input
           label={t('registration.labels.firstName') || 'Имя'}
           placeholder={t('registration.placeholders.firstName') || 'Иван'}
@@ -124,7 +115,9 @@ export const Registration = () => {
           }
           {...register('isHr')}
         />
-        <Button label={t('registration.buttons.submit')} type="submit" />
+        <Button type="submit" disabled={!isValid} loading={isLoading}>
+          {t('registration.buttons.submit')}
+        </Button>
       </form>
     </Page>
   );

@@ -43,7 +43,7 @@
   content: "";
   display: inline-block;
   cursor: pointer;
-  outline: 1px solid var(--silverColor);
+  outline: 1px solid var(--sky-60);
   border-radius: 50%;
   height: 16px;
   width: 16px;
@@ -53,10 +53,10 @@
   /*Стиль ярлыка*/
   margin-left: 12px;
   cursor: pointer;
-  color: var(--grayColor);
+  color: var(--sky-80);
   transition: color 0.1s ease-in-out;
 
   &:hover {
-    color: var(--primaryColor);
+    color: var(--sky-100);
   }
 }

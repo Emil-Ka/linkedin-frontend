@@ -1,0 +1,13 @@
+@import '../../../design/fonts.scss';
+
+.wrapper {
+  background: var(--errorColor);
+  opacity: .8;
+  border: 2px solid var(--errorColor);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.error {
+  @include text-regular($color: var(--whiteColor));
+}

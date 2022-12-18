@@ -9,5 +9,5 @@
 }
 
 .label {
-  @include title-2-regular($color: var(--secondaryColor), $weight: 500);
+  @include title-2-regular($color: var(--whiteColor), $weight: 500);
 }

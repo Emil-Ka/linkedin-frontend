@@ -1,7 +1,7 @@
 @import '../../../design/fonts.scss';
 
 .footer {
-  background: var(--secondaryColor);
+  background: var(--whiteColor);
 }
 
 .content {
@@ -14,11 +14,11 @@
 }
 
 .link {
-  @include subhead-regular($color: var(--grayColor));
+  @include subhead-regular($color: var(--sky-80));
   transition: color .2s ease-in-out;
 
   &:hover {
-    color: var(--primaryColor);
+    color: var(--sky-100);
   }
 }
 

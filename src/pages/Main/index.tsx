@@ -1,16 +1,30 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { bindActionCreators } from '@reduxjs/toolkit';
 
-export const Main = () => {
-  const state = useSelector((state) => state);
+import { useTypedSelector, useTypedDispatch } from '../../hooks';
+import { useGetUserQuery } from '../../redux/api/user';
+import { setUser } from '../../redux/slices/user-slice';
+import { Page } from '../../components';
+
+export const Main: FC = () => {
+  const dispatch = useTypedDispatch();
+  const { setUser: changeUser } = bindActionCreators({ setUser }, dispatch);
+  const { user } = useTypedSelector((state) => state.user);
+  const { data, error, isLoading } = useGetUserQuery();
 
   useEffect(() => {
-    console.log(state);
-  }, [state]);
+    if (data) {
+      changeUser({ user: data });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log('error', error);
+  }, [error]);
 
   return (
-    <div>
+    <Page>
       Главная
-    </div>
+    </Page>
   );
 };

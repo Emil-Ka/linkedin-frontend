@@ -5,8 +5,15 @@ import { ButtonProps } from './button.props';
 
 import styles from './button.module.scss';
 
-export const Button: FC<ButtonProps> = ({ label, className, ...props }) => (
-  <button className={cn(styles.button, className)} {...props}>
-    <span className={styles.label}>{label}</span>
+export const Button: FC<ButtonProps> = ({
+  className, loading = false, children, ...props
+}) => (
+  <button
+    className={cn(styles.button, className, {
+      [styles.button_loading]: loading,
+    })}
+    {...props}
+  >
+    {children}
   </button>
 );

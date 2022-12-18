@@ -1,6 +1,15 @@
 import { IRegistrationRequest } from '../../pages/Registration/types';
 
-export type IUser = Omit<IRegistrationRequest, 'password'>;
+export interface IUser {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  photo: string;
+  bio: string;
+  is_active: boolean;
+  role: 0 | 1 | 2;
+}
 
 export interface InitialState {
   user: IUser | null;
@@ -20,4 +29,5 @@ export interface IErrorResponse {
   status: number;
 }
 
+// Type Guard
 export const instanceOfIErrorResponse = (error: any): error is IErrorResponse => 'data' in error && 'status' in error;

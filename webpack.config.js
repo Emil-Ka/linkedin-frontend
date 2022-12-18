@@ -1,5 +1,5 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.tsx",
@@ -7,7 +7,16 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
-  // plugins: [new MiniCssExtractPlugin({runtime: false})],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src", "assets"),
+          to: path.resolve(__dirname, "dist", "assets"),
+        },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -20,38 +29,33 @@ module.exports = {
       {
         test: /(\.module)?\.s[ac]ss$/i,
         use: [
-          // MiniCssExtractPlugin.loader,
-          "style-loader",
-          "css-loader",
-          "sass-loader",
-        ]
+          { loader: "style-loader" },
+          { loader: "css-loader", options: { url: false } },
+          { loader: "sass-loader" },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: ['file-loader']
+        use: ["file-loader"],
       },
       {
         test: /\.svg$/,
         use: [
           {
-            loader: "babel-loader"
+            loader: "babel-loader",
           },
           {
             loader: "react-svg-loader",
             options: {
-              jsx: true
-            }
-          }
-        ]
-      }
+              jsx: true,
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
-    alias: {
-      components: path.resolve(__dirname, "src/components"),
-      pages: path.resolve(__dirname, "src/pages")
-    },
   },
   devServer: {
     static: [path.resolve(__dirname, "dist")],
