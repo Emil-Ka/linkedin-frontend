@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './redux/store';
-import './locales/i18n';
 import { AppRouter } from './pages/routes';
 
+import './locales/i18n';
 import './design/index.scss';
 
 const htmlRoot = document.querySelector('#root');

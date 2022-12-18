@@ -2,10 +2,12 @@ import React from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 
 import { Registration, Main } from './index';
+import Login from './Login';
 
 export const PATHS = {
   MAIN: '/',
-  REGISTRATION: '/reg',
+  REGISTRATION: '/registration',
+  LOGIN: '/login',
 };
 
 const routes: RouteObject[] = [
@@ -16,6 +18,10 @@ const routes: RouteObject[] = [
   {
     path: PATHS.REGISTRATION,
     element: <Registration />,
+  },
+  {
+    path: PATHS.LOGIN,
+    element: <Login />,
   },
 ];
 

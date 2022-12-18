@@ -25,6 +25,9 @@ export const Main: FC = () => {
   return (
     <Page>
       Главная
+      {user?.email}
+      {user?.first_name}
+      {user?.last_name}
     </Page>
   );
 };
