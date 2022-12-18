@@ -1,0 +1,13 @@
+@import '../../../design/fonts.scss';
+
+.logo {
+  display: block;
+  text-decoration: none;
+  background: var(--nevaColor);
+  padding: 3px 7px;
+  border-radius: 7px;
+}
+
+.label {
+  @include title-2-regular($color: var(--whiteColor), $weight: 500);
+}

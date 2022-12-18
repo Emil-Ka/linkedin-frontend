@@ -1,0 +1,28 @@
+@import '../../../design/fonts.scss';
+
+.footer {
+  background: var(--whiteColor);
+}
+
+.content {
+  padding: 35px 0;
+  display: grid;
+  grid-template-areas: 'logo nav icons';
+  grid-template-columns: auto 1fr auto;
+  gap: 90px;
+  align-items: start;
+}
+
+.link {
+  @include subhead-regular($color: var(--sky-80));
+  transition: color .2s ease-in-out;
+
+  &:hover {
+    color: var(--sky-100);
+  }
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+}

@@ -1,0 +1,62 @@
+@import "../../../design/fonts.scss";
+
+.wrapper {
+  @include text-regular();
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    /*Стили маркеров при наведении на весь блок radioButton*/
+    :not(input:disabled, input:checked) + .marker {
+      /*Стили базового маркера, если он НЕ disabled и НЕ checked*/
+      outline: 1px solid var(--blueColor);
+    }
+  }
+}
+
+.input {
+  display: none;
+
+  &:checked {
+    /*Стили для маркеров, когда input checked*/
+    & + .marker {
+      outline: 1px solid var(--blueColor);
+      border-radius: 50%;
+      position: relative;
+
+      &:before {
+        content: "";
+        background: var(--blueColor);
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.marker {
+  /*Стиль стандартного маркера*/
+  content: "";
+  display: inline-block;
+  cursor: pointer;
+  outline: 1px solid var(--sky-60);
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+}
+
+.label {
+  /*Стиль ярлыка*/
+  margin-left: 12px;
+  cursor: pointer;
+  color: var(--sky-80);
+  transition: color 0.1s ease-in-out;
+
+  &:hover {
+    color: var(--sky-100);
+  }
+}

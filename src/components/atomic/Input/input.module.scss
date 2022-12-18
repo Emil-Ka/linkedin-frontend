@@ -1,8 +1,16 @@
 @import '../../../design/fonts.scss';
 
+.wrapper {
+  position: relative;
+}
+
 .label {
-  @include label($weight: 500);
+  @include subhead-regular();
   margin-bottom: 12px;
+}
+
+.inputWrapper {
+  position: relative;
 }
 
 .input {
@@ -16,4 +24,25 @@
     outline: none;
     border: 1px solid var(--borderInputColorFocus);
   }
+
+  &::placeholder {
+    @include text-regular();
+    color: var(--placeholderColor);
+  }
+}
+
+.error {
+  @include caption-2-medium();
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: var(--errorColor);
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 14px;
+  bottom: 50%;
+  margin-bottom: -8px;
+  cursor: pointer;
 }
