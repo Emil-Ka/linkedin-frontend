@@ -13,7 +13,7 @@ import { useLoginMutation } from '../../redux/api/user';
 import { instanceOfIErrorResponse } from '../../redux/types/user-slice';
 import { setToken } from '../../redux/slices/user-slice';
 import { setCookie } from '../../models/cookie';
-import { PATHS } from '../routes';
+import { PATHS } from '../../constants/paths';
 
 import styles from '../Registration/registration.module.scss';
 

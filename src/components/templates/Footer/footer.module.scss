@@ -14,7 +14,7 @@
 }
 
 .link {
-  @include subhead-regular($color: var(--sky-80));
+  @include subhead-regular($color: var(--sky-70));
   transition: color .2s ease-in-out;
 
   &:hover {

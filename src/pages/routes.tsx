@@ -2,13 +2,8 @@ import React from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 
 import { Registration, Main } from './index';
+import { PATHS } from '../constants/paths';
 import Login from './Login';
-
-export const PATHS = {
-  MAIN: '/',
-  REGISTRATION: '/registration',
-  LOGIN: '/login',
-};
 
 const routes: RouteObject[] = [
   {

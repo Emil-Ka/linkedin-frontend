@@ -17,6 +17,9 @@ const userSlice = createSlice({
     setToken: (state, { payload: { token } }: PayloadAction<ISetTokenPayload>) => {
       state.token = token;
     },
+    resetUser: (state) => {
+      state.user = null;
+    },
   },
 });
 
