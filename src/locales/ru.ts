@@ -40,5 +40,8 @@ export const ru = {
     contacts: 'Контакты',
     main: 'Главная',
     about: 'О проекте',
+    tests: 'Тесты',
+    vacancies: 'Вакансии',
+    account: 'Личный кабинет',
   },
 };

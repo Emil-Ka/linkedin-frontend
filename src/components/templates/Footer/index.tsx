@@ -5,7 +5,8 @@ import cn from 'classnames';
 import { FooterProps } from './footer.props';
 import { Container } from '../Container';
 import { Logo } from '../../atomic';
-import { useLinks } from './hooks/useLinks';
+import { usePaths } from '../../../hooks/use-paths';
+import { useTypedSelector } from '../../../hooks';
 
 import TgIcon from './assets/tg.svg';
 import VkIcon from './assets/vk.svg';
@@ -13,7 +14,8 @@ import VkIcon from './assets/vk.svg';
 import styles from './footer.module.scss';
 
 export const Footer: FC<FooterProps> = ({ className, ...props }) => {
-  const links = useLinks();
+  const links = usePaths();
+  const { user } = useTypedSelector((state) => state.user);
 
   return (
     <footer className={cn(className, styles.footer)}>
@@ -21,10 +23,16 @@ export const Footer: FC<FooterProps> = ({ className, ...props }) => {
         <Logo isLink />
         <nav className={styles.navigation}>
           <ul className={styles.list}>
-            {links.map(({ path, label }) => (
+            {links.map(({
+              path, label, show, isAuth,
+            }) => (
+              show.includes('footer')
+              && isAuth.includes(!!user)
+              && (
               <li key={path}>
                 <Link className={styles.link} to={path}>{label}</Link>
               </li>
+              )
             ))}
           </ul>
         </nav>

@@ -1,8 +1,55 @@
+@import '../../../design/fonts.scss';
+
 .header {
   padding: 20px 0;
   background: var(--whiteColor);
 }
 
 .content {
+  display: grid;
+  grid-template-areas: 'logo . navigate avatar';
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 4%;
+}
+
+.logo {
+  grid-area: logo;
+}
+
+.navigate {
+  grid-area: navigate;
+}
+
+.avatar {
+  grid-area: avatar;
+}
+
+.list {
   display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.link {
+  @include caption-2-medium();
+  position: relative;
+
+  &::after {
+    content: '';
+    opacity: 0;
+    background: var(--sky-100);
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    transition: opacity .3s linear;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+  }
 }
