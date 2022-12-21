@@ -1,3 +1,5 @@
+@import '../../design/fonts.scss';
+
 .form {
   background: var(--formBg);
   padding: 60px 80px;
@@ -17,4 +19,18 @@
   justify-content: center;
   align-items: center;
   padding: 120px 0;
+}
+
+.title {
+  @include title-2-regular();
+  text-align: center;
+}
+
+.link {
+  @include caption-2-medium($color: var(--blueColor));
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    text-decoration: underline;
+  } 
 }

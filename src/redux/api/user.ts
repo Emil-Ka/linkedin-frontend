@@ -4,6 +4,7 @@ import { HTTP_PATH } from '../helper/http';
 import { RootStateType } from '../store';
 import { IUser } from '../types/user-slice';
 import { getCookie } from '../../models/cookie';
+import { ILoginData } from '../../pages/Login/types';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${HTTP_PATH}/auth`,
@@ -21,9 +22,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-type BaseQueryParams = Parameters<typeof baseQuery>;
-
-const baseQueryWithReauth = async (args: BaseQueryParams[0], api: BaseQueryParams[1], extraOptions: BaseQueryParams[2]) => {
+const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
 
   // Здесь будет логика по извлечению нового access токена по refresh токену взамен истёкшего access токена
@@ -42,6 +41,13 @@ export const userApi = createApi({
         body,
       }),
     }),
+    login: build.mutation<IRegistrationResponse, ILoginData>({
+      query: (body) => ({
+        url: '/login/',
+        method: 'POST',
+        body,
+      }),
+    }),
     getUser: build.query<IUser, void>({
       query: () => ({
         url: '/user/',
@@ -50,4 +56,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useRegisterMutation, useGetUserQuery } = userApi;
+export const { useRegisterMutation, useLoginMutation, useGetUserQuery } = userApi;

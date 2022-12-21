@@ -17,6 +17,22 @@ export const ru = {
     buttons: {
       submit: 'Зарегестрироваться',
     },
+    link: 'Уже есть аккаунт? Войдите',
+  },
+  login: {
+    title: 'Вход',
+    labels: {
+      email: 'Электронная почта',
+      password: 'Пароль',
+    },
+    error: 'Это обязательное поле',
+    placeholders: {
+      email: 'ivanov@gmail.com',
+    },
+    buttons: {
+      submit: 'Войти',
+    },
+    link: 'Ещё нет аккаунта? Зарегестрируйтесь',
   },
   links: {
     login: 'Вход',

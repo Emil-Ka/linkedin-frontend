@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
@@ -11,12 +11,12 @@ import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData } from './types';
 import { convertApiData } from '../../services/convert-api-data';
 import { setToken } from '../../redux/slices/user-slice';
+import { setCookie } from '../../models/cookie';
 import { instanceOfIErrorResponse } from '../../redux/types/user-slice';
 import { useTypedDispatch } from '../../hooks';
 import { PATHS } from '../routes';
 
 import styles from './registration.module.scss';
-import { setCookie } from '../../models/cookie';
 
 export const initRegistrationState: IRegistrationInitData = {
   first_name: '',
@@ -73,6 +73,7 @@ export const Registration: FC = () => {
   return (
     <Page className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <h1 className={styles.title}>{t('registration.title')}</h1>
         {error && <Error errors={error} />}
         <Input
           label={t('registration.labels.firstName') || 'Имя'}
@@ -118,6 +119,9 @@ export const Registration: FC = () => {
         <Button type="submit" disabled={!isValid} loading={isLoading}>
           {t('registration.buttons.submit')}
         </Button>
+        <Link className={styles.link} to={PATHS.LOGIN}>
+          {t('registration.link')}
+        </Link>
       </form>
     </Page>
   );
