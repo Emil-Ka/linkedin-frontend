@@ -10,8 +10,8 @@ import {
 import { ILoginData } from './types';
 import { useTypedDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/user';
-import { instanceOfIErrorResponse } from '../../redux/types/user-slice';
-import { setToken } from '../../redux/slices/user-slice';
+import { instanceOfIErrorResponse } from '../../redux/types/user';
+import { setToken } from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
 import { PATHS } from '../../constants/paths';
 

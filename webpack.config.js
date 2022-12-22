@@ -1,5 +1,6 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.tsx",
@@ -16,6 +17,10 @@ module.exports = {
         },
       ],
     }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src", "index.html"),
+      filename: path.resolve(__dirname, "dist", "index.html"),
+    })
   ],
   module: {
     rules: [
