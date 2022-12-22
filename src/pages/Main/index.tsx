@@ -3,7 +3,7 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 
 import { useTypedSelector, useTypedDispatch } from '../../hooks';
 import { useGetUserQuery } from '../../redux/api/user';
-import { setUser } from '../../redux/slices/user-slice';
+import { setUser } from '../../redux/slices/user';
 import { Page } from '../../components';
 
 export const Main: FC = () => {

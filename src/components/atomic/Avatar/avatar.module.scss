@@ -6,7 +6,6 @@
 
   &:hover {
     .caption {
-      visibility: visible;
       opacity: 1;
     }
   }
@@ -29,7 +28,6 @@
   padding: 3px 5px;
   border-radius: 8px;
   white-space: nowrap;
-  visibility: hidden;
   opacity: 0;
-  transition: opacity .4s linear;
+  transition: opacity .5s linear;
 }

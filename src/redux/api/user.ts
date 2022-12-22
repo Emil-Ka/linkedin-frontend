@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IRegistrationResponse, IRegistrationRequest } from '../../pages/Registration/types';
-import { HTTP_PATH } from '../helper/http';
+import { BACKEND_URL } from '../../config/backend.config';
 import { RootStateType } from '../store';
-import { IUser } from '../types/user-slice';
+import { IUser } from '../types/user';
 import { getCookie } from '../../models/cookie';
 import { ILoginData } from '../../pages/Login/types';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${HTTP_PATH}/auth`,
+  baseUrl: `${BACKEND_URL.api}/auth`,
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootStateType;
     const cookieToken = getCookie('token');

@@ -10,9 +10,9 @@ import {
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData } from './types';
 import { convertApiData } from '../../services/convert-api-data';
-import { setToken } from '../../redux/slices/user-slice';
+import { setToken } from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
-import { instanceOfIErrorResponse } from '../../redux/types/user-slice';
+import { instanceOfIErrorResponse } from '../../redux/types/user';
 import { useTypedDispatch } from '../../hooks';
 import { PATHS } from '../../constants/paths';
 

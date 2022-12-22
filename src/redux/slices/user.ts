@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { InitialState, ISetTokenPayload, ISetUserPayload } from '../types/user-slice';
+import { InitialState, ISetTokenPayload, ISetUserPayload } from '../types/user';
 
 const initialState: InitialState = {
   user: null,

@@ -1,5 +1,3 @@
-import { IRegistrationRequest } from '../../pages/Registration/types';
-
 export interface IUser {
   id: number;
   email: string;
