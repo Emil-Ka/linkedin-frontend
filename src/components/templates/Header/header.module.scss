@@ -7,8 +7,8 @@
 
 .content {
   display: grid;
-  grid-template-areas: 'logo . navigate avatar';
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-areas: 'logo . navigate';
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 4%;
 }
@@ -21,14 +21,15 @@
   grid-area: navigate;
 }
 
-.avatar {
-  grid-area: avatar;
-}
-
 .list {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
+
+  a > img {
+    margin-left: 20px;
+  }
 }
 
 .link {

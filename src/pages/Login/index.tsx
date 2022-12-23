@@ -11,19 +11,23 @@ import { ILoginData } from './types';
 import { useTypedDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/user';
 import { instanceOfIErrorResponse } from '../../redux/types/user';
-import { setToken } from '../../redux/slices/user';
+import * as userSlice from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
 import { PATHS } from '../../constants/paths';
 
 import styles from '../Registration/registration.module.scss';
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const { t } = useTranslation();
   const [error, setError] = useState<string[] | null>(null);
   const [login, { isLoading, error: errorResponse }] = useLoginMutation();
-  const { setToken: changeToken } = bindActionCreators({ setToken }, dispatch);
+
+  const { setToken, resetUser } = bindActionCreators({
+    setToken: userSlice.setToken,
+    resetUser: userSlice.resetUser,
+  }, dispatch);
 
   const {
     register,
@@ -33,6 +37,11 @@ const Login = () => {
   } = useForm<ILoginData>({
     mode: 'all',
   });
+
+  useEffect(() => {
+    resetUser();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (errorResponse && instanceOfIErrorResponse(errorResponse)) {
@@ -47,13 +56,11 @@ const Login = () => {
   }, [errorResponse]);
 
   const onSubmit = async (data: ILoginData) => {
-    console.log(data);
-
     const payload = await login(data).unwrap();
 
     reset();
 
-    changeToken({
+    setToken({
       token: payload.access,
     });
 
@@ -93,5 +100,3 @@ const Login = () => {
     </Page>
   );
 };
-
-export default Login;

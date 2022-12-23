@@ -1,9 +1,10 @@
 import React from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 
-import { Registration, Main } from './index';
+import {
+  Registration, Main, Account, Login,
+} from './index';
 import { PATHS } from '../constants/paths';
-import Login from './Login';
 
 const routes: RouteObject[] = [
   {
@@ -17,6 +18,10 @@ const routes: RouteObject[] = [
   {
     path: PATHS.LOGIN,
     element: <Login />,
+  },
+  {
+    path: PATHS.ACCOUNT,
+    element: <Account />,
   },
 ];
 

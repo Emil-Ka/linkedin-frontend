@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Link } from 'react-router-dom';
 import { Avatar, Logo } from '../../atomic';
 import { Container } from '../Container';
 import { HeaderProps } from './header.props';
-import { useTypedSelector } from '../../../hooks';
-import { usePaths } from '../../../hooks/use-paths';
+import { useLinks } from '../../../hooks/use-links';
 
 import styles from './header.module.scss';
 
 export const Header: FC<HeaderProps> = ({ className, ...props }) => {
-  const paths = usePaths();
-  const { user } = useTypedSelector((state) => state.user);
+  const { links, isShow } = useLinks();
 
   return (
     <header className={cn(styles.header, className)} {...props}>
@@ -20,22 +18,23 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
         <Logo isLink className={styles.logo} />
         <nav className={styles.navigate}>
           <ul className={styles.list}>
-            {paths.map(({
-              path, label, show, isAuth,
+            {links.map(({
+              path, label, show, isAuth, Component, excludeShow,
             }) => (
-              show.includes('header')
-              && isAuth.includes(!!user)
-              && (
-              <li className={styles.item} key={path}>
-                <Link className={styles.link} to={path}>
-                  {label}
-                </Link>
-              </li>
+              isShow('header', {
+                path, label, show, isAuth, Component, excludeShow,
+              }) && (
+                <li className={styles.item} key={path}>
+                  { Component || (
+                  <Link className={styles.link} to={path}>
+                    {label}
+                  </Link>
+                  ) }
+                </li>
               )
             ))}
           </ul>
         </nav>
-        <Avatar className={styles.avatar} />
       </Container>
     </header>
   );
