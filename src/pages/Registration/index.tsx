@@ -10,7 +10,7 @@ import {
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData } from './types';
 import { convertApiData } from '../../services/convert-api-data';
-import { setToken } from '../../redux/slices/user';
+import * as userSlice from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
 import { instanceOfIErrorResponse } from '../../redux/types/user';
 import { useTypedDispatch } from '../../hooks';
@@ -33,7 +33,10 @@ export const Registration: FC = () => {
   const [error, setError] = useState<string[] | null>(null);
   const [registration, { isLoading, error: errorResponse }] = useRegisterMutation();
 
-  const { setToken: changeToken } = bindActionCreators({ setToken }, dispatch);
+  const { setToken, resetUser } = bindActionCreators({
+    setToken: userSlice.setToken,
+    resetUser: userSlice.resetUser,
+  }, dispatch);
 
   const {
     register,
@@ -43,6 +46,11 @@ export const Registration: FC = () => {
   } = useForm<IRegistrationInitData>({
     mode: 'all',
   });
+
+  useEffect(() => {
+    resetUser();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (errorResponse && instanceOfIErrorResponse(errorResponse)) {
@@ -61,7 +69,7 @@ export const Registration: FC = () => {
 
     reset();
 
-    changeToken({
+    setToken({
       token: payload.access,
     });
 

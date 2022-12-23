@@ -5,8 +5,7 @@ import cn from 'classnames';
 import { FooterProps } from './footer.props';
 import { Container } from '../Container';
 import { Logo } from '../../atomic';
-import { usePaths } from '../../../hooks/use-paths';
-import { useTypedSelector } from '../../../hooks';
+import { useLinks } from '../../../hooks/use-links';
 
 import TgIcon from './assets/tg.svg';
 import VkIcon from './assets/vk.svg';
@@ -14,8 +13,7 @@ import VkIcon from './assets/vk.svg';
 import styles from './footer.module.scss';
 
 export const Footer: FC<FooterProps> = ({ className, ...props }) => {
-  const links = usePaths();
-  const { user } = useTypedSelector((state) => state.user);
+  const { links, isShow } = useLinks();
 
   return (
     <footer className={cn(className, styles.footer)}>
@@ -24,13 +22,17 @@ export const Footer: FC<FooterProps> = ({ className, ...props }) => {
         <nav className={styles.navigation}>
           <ul className={styles.list}>
             {links.map(({
-              path, label, show, isAuth,
+              path, label, show, isAuth, Component, excludeShow,
             }) => (
-              show.includes('footer')
-              && isAuth.includes(!!user)
-              && (
-              <li key={path}>
-                <Link className={styles.link} to={path}>{label}</Link>
+              isShow('footer', {
+                path, label, show, isAuth, Component, excludeShow,
+              }) && (
+              <li className={styles.item} key={path}>
+                { Component || (
+                <Link className={styles.link} to={path}>
+                  {label}
+                </Link>
+                ) }
               </li>
               )
             ))}

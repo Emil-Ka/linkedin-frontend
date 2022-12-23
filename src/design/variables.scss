@@ -44,6 +44,7 @@
 :root, :root[data-theme="light"] {
   --placeholderColor: #8D8D8D;
   --bgColor: #F7F9FB;
+  --cardColor: #FFFFFF;
   --borderInputColor: #E9E9E9;
   --borderInputColorFocus: #a4a4a4;
   --formBg: #fff;
@@ -54,6 +55,7 @@
 :root[data-theme="dark"] {
   --placeholderColor: #8D8D8D;
   --bgColor: #F7F9FB;
+  --cardColor: #FFFFFF;
   --borderInputColor: #E9E9E9;
   --formBg: #000;
   --inputBg: #F4F4F4;

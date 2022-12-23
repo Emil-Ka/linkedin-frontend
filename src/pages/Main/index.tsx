@@ -3,18 +3,18 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 
 import { useTypedSelector, useTypedDispatch } from '../../hooks';
 import { useGetUserQuery } from '../../redux/api/user';
-import { setUser } from '../../redux/slices/user';
+import * as userSlice from '../../redux/slices/user';
 import { Page } from '../../components';
 
 export const Main: FC = () => {
   const dispatch = useTypedDispatch();
-  const { setUser: changeUser } = bindActionCreators({ setUser }, dispatch);
+  const { setUser } = bindActionCreators({ setUser: userSlice.setUser }, dispatch);
   const { user } = useTypedSelector((state) => state.user);
   const { data, error, isLoading } = useGetUserQuery();
 
   useEffect(() => {
     if (data) {
-      changeUser({ user: data });
+      setUser({ user: data });
     }
   }, [data]);
 

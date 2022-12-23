@@ -3,8 +3,8 @@ export interface IUser {
   email: string;
   first_name: string;
   last_name: string;
-  photo: string;
-  bio: string;
+  photo: string | null;
+  bio: string | null;
   is_active: boolean;
   role: 0 | 1 | 2;
 }
