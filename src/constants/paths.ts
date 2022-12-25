@@ -5,6 +5,8 @@ export const enum PATHS {
   CONTACTS = '/contacts',
   ABOUT = '/about',
   VACANCIES = '/vacancies',
+  VACANCY_ID = '/:id',
+  ADD_VACANCY = '/add-vacancy',
   TESTS = '/tests',
   ACCOUNT = '/account',
 }

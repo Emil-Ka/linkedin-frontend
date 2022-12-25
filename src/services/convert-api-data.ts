@@ -1,6 +1,5 @@
 import { initRegistrationState } from '../pages/Registration';
-import { IRegistrationInitData, IRegistrationRequest } from '../pages/Registration/types';
-import { camelToSnakeCase } from './camel-to-snake-case';
+import { IRegistrationInitData, IRegistrationRequest } from '../redux/types/user';
 
 export const convertApiData = {
   registration: (data: IRegistrationInitData): IRegistrationRequest => ({

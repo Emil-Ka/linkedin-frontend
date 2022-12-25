@@ -1,0 +1,47 @@
+@import '../../design/fonts.scss';
+
+.content {
+  padding: 40px 0;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.addVacancy {
+  justify-self: flex-end;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card {
+  padding: 20px 30px;
+}
+
+.vacancyTitle {
+  @include title-3-medium($color: var(--nevaColor));
+}
+
+.companyName {
+  @include text-medium();
+}
+
+.salary {
+  @include text-medium($weight: 600);
+  display: block;
+  margin-top: 30px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 30px;
+}

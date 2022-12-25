@@ -13,15 +13,6 @@
   align-items: start;
 }
 
-.link {
-  @include subhead-regular($color: var(--sky-70));
-  transition: color .2s ease-in-out;
-
-  &:hover {
-    color: var(--sky-100);
-  }
-}
-
 .icons {
   display: flex;
   gap: 20px;

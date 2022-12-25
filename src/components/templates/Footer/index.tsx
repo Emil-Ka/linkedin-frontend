@@ -4,8 +4,8 @@ import cn from 'classnames';
 
 import { FooterProps } from './footer.props';
 import { Container } from '../Container';
-import { Logo } from '../../atomic';
-import { useLinks } from '../../../hooks/use-links';
+import { CustomLink, Logo } from '../../atomic';
+import { useLinks } from '../../../hooks';
 
 import TgIcon from './assets/tg.svg';
 import VkIcon from './assets/vk.svg';
@@ -29,9 +29,9 @@ export const Footer: FC<FooterProps> = ({ className, ...props }) => {
               }) && (
               <li className={styles.item} key={path}>
                 { Component || (
-                <Link className={styles.link} to={path}>
-                  {label}
-                </Link>
+                <CustomLink to={path} type="footer">
+                  { label }
+                </CustomLink>
                 ) }
               </li>
               )
