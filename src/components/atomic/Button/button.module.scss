@@ -37,4 +37,19 @@
     color: var(--sky-60);
     cursor: not-allowed;
   }
+
+  &_pagination {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sky-10);
+    color: var(--sky-60);
+
+    &.selected {
+      color: var(--whiteColor);
+      background: var(--blueColor);
+    }
+  }
 }

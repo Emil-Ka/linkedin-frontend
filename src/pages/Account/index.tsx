@@ -1,34 +1,22 @@
-import React, { useEffect } from 'react';
-import { bindActionCreators } from '@reduxjs/toolkit';
+import React from 'react';
 
 import { Card, Container, Page } from '../../components';
-import { useTypedSelector, useTypedDispatch } from '../../hooks';
+import { useGetUser } from '../../hooks';
 import { BACKEND_URL } from '../../config/backend.config';
-import { useGetUserQuery } from '../../redux/api/user';
-import * as userSlice from '../../redux/slices/user';
 
-import profileFont from './assets/preview-font.jpg';
+import peviewImg from './assets/preview.jpg';
 
 import styles from './account.module.scss';
 
 export const Account = () => {
-  const dispatch = useTypedDispatch();
-  const { user } = useTypedSelector((state) => state.user);
-  const { setUser } = bindActionCreators({ setUser: userSlice.setUser }, dispatch);
-  const { data, error, isLoading } = useGetUserQuery();
-
-  useEffect(() => {
-    if (data) {
-      setUser({ user: data });
-    }
-  }, [data]);
+  const { user } = useGetUser();
 
   return user && (
     <Page>
       <Container className={styles.content}>
         <Card className={styles.preview}>
           <img
-            src={profileFont}
+            src={peviewImg}
             alt="preview-img"
             className={styles.previewImg}
           />

@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Avatar, Logo } from '../../atomic';
+import { Avatar, CustomLink, Logo } from '../../atomic';
 import { Container } from '../Container';
 import { HeaderProps } from './header.props';
-import { useLinks } from '../../../hooks/use-links';
+import { useLinks } from '../../../hooks';
 
 import styles from './header.module.scss';
 
@@ -26,9 +26,9 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
               }) && (
                 <li className={styles.item} key={path}>
                   { Component || (
-                  <Link className={styles.link} to={path}>
-                    {label}
-                  </Link>
+                  <CustomLink to={path} type="header">
+                    { label }
+                  </CustomLink>
                   ) }
                 </li>
               )

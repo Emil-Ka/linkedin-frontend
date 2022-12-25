@@ -1,26 +1,12 @@
-import React, { FC, useEffect } from 'react';
-import { bindActionCreators } from '@reduxjs/toolkit';
+import React, { FC } from 'react';
 
-import { useTypedSelector, useTypedDispatch } from '../../hooks';
-import { useGetUserQuery } from '../../redux/api/user';
-import * as userSlice from '../../redux/slices/user';
+import { useGetUser } from '../../hooks';
 import { Page } from '../../components';
 
 export const Main: FC = () => {
-  const dispatch = useTypedDispatch();
-  const { setUser } = bindActionCreators({ setUser: userSlice.setUser }, dispatch);
-  const { user } = useTypedSelector((state) => state.user);
-  const { data, error, isLoading } = useGetUserQuery();
+  const { user } = useGetUser();
 
-  useEffect(() => {
-    if (data) {
-      setUser({ user: data });
-    }
-  }, [data]);
-
-  useEffect(() => {
-    console.log('error', error);
-  }, [error]);
+  console.log('main');
 
   return (
     <Page>

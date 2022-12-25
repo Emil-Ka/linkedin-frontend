@@ -6,12 +6,21 @@ import { ButtonProps } from './button.props';
 import styles from './button.module.scss';
 
 export const Button: FC<ButtonProps> = ({
-  className, loading = false, children, ...props
+  className,
+  type = 'button',
+  loading = false,
+  selected,
+  children,
+  customType,
+  ...props
 }) => (
   <button
     className={cn(styles.button, className, {
       [styles.button_loading]: loading,
+      [styles.button_pagination]: customType === 'pagination',
+      [styles.selected]: selected,
     })}
+    type={type}
     {...props}
   >
     {children}

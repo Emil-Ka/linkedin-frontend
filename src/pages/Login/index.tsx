@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
@@ -18,14 +18,15 @@ import { PATHS } from '../../constants/paths';
 import styles from '../Registration/registration.module.scss';
 
 export const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const { t } = useTranslation();
   const [error, setError] = useState<string[] | null>(null);
+  const [redirect, setRedirect] = useState<boolean>(false);
   const [login, { isLoading, error: errorResponse }] = useLoginMutation();
 
-  const { setToken, resetUser } = bindActionCreators({
+  const { setToken, resetUser, setUser } = bindActionCreators({
     setToken: userSlice.setToken,
+    setUser: userSlice.setUser,
     resetUser: userSlice.resetUser,
   }, dispatch);
 
@@ -60,14 +61,16 @@ export const Login = () => {
 
     reset();
 
-    setToken({
-      token: payload.access,
-    });
-
+    setToken({ token: payload.access });
+    setUser({ user: payload.data });
     setCookie('token', payload.access, 1);
 
-    navigate(PATHS.MAIN);
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return <Navigate to={PATHS.MAIN} />;
+  }
 
   return (
     <Page className={styles.page}>

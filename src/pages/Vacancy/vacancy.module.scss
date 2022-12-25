@@ -1,0 +1,29 @@
+@import '../../design/fonts.scss';
+
+.content {
+  padding: 40px 0;
+  height: 100vh;
+}
+
+.card {
+  padding: 30px;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.salary {
+  @include title-3-medium($color: var(--greenColor));
+}
+
+.companyName {
+  @include title-4-medium();
+  margin-bottom: 40px;
+}

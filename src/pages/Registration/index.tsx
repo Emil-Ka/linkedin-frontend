@@ -8,11 +8,10 @@ import {
   Button, Input, CheckBox, Page, Error,
 } from '../../components';
 import { useRegisterMutation } from '../../redux/api/user';
-import { IRegistrationInitData } from './types';
+import { IRegistrationInitData, instanceOfIErrorResponse } from '../../redux/types/user';
 import { convertApiData } from '../../services/convert-api-data';
 import * as userSlice from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
-import { instanceOfIErrorResponse } from '../../redux/types/user';
 import { useTypedDispatch } from '../../hooks';
 import { PATHS } from '../../constants/paths';
 

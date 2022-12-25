@@ -44,4 +44,9 @@ export const ru = {
     vacancies: 'Вакансии',
     account: 'Личный кабинет',
   },
+  vacancies: {
+    buttons: {
+      addVacancy: '+ добавить вакансию',
+    },
+  },
 };
