@@ -1,24 +1,15 @@
 @import '../../design/fonts.scss';
-
-.form {
-  background: var(--formBg);
-  padding: 60px 80px;
-  border-radius: 12px;
-  min-width: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-
-  & > div:last-of-type {
-    margin-bottom: 16px;
-  }
-}
+@import '../../design/share.scss';
 
 .page {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 120px 0;
+}
+
+.form {
+  @extend %form;
 }
 
 .title {

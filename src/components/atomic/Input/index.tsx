@@ -1,6 +1,4 @@
-import React, {
-  ForwardedRef, forwardRef, useId, useState,
-} from 'react';
+import React, { forwardRef, useId, useState } from 'react';
 import cn from 'classnames';
 
 import { InputProps } from './input.props';
@@ -13,7 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       className, error, label, type, ...props
     },
-    ref: ForwardedRef<HTMLInputElement>,
+    ref,
   ) => {
     const id = useId();
     const [inputType, setInputType] = useState(type);

@@ -40,3 +40,5 @@ export interface IVacanciesQueries {
 export type IVacancyParams = {
   id?: string;
 }
+
+export type IVacancyRequest = Omit<IVacancy, 'id' | 'user'>;

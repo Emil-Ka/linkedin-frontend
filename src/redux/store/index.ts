@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { userReducer } from '../slices/user';
-import { userApi } from '../api/user';
-import { vacanciesApi } from '../api/vacancies';
+import { baseApi } from '../api';
 
 export const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
-    [vacanciesApi.reducerPath]: vacanciesApi.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware, vacanciesApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 export type DispatchType = typeof store.dispatch;

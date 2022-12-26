@@ -6,3 +6,4 @@ export * from './Error';
 export * from './Avatar';
 export * from './Card';
 export * from './CustomLink';
+export * from './Textarea';

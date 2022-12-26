@@ -12,8 +12,8 @@ const initialState: IVacanciesState = {
   pageCount: 1,
 };
 
-export const vacanciesSlice = createSlice({
-  name: 'vacancies',
+export const vacancySlice = createSlice({
+  name: 'vacancy',
   initialState,
   reducers: {
     addVacancies: (state, { payload: { vacancies } }: PayloadAction<IAddVacancies>) => {

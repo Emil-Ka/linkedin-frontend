@@ -1,0 +1,18 @@
+@import '../../design/share.scss';
+@import '../../design/fonts.scss';
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.form {
+  @extend %form;
+}
+
+.title {
+  @include title-2-regular();
+  text-align: center;
+}

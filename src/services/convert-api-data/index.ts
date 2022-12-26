@@ -1,5 +1,5 @@
-import { initRegistrationState } from '../pages/Registration';
-import { IRegistrationInitData, IRegistrationRequest } from '../redux/types/user';
+import { initRegistrationState } from '../../pages/Registration';
+import { IRegistrationInitData, IRegistrationRequest } from '../../redux/types/user';
 
 export const convertApiData = {
   registration: (data: IRegistrationInitData): IRegistrationRequest => ({

@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -7,11 +7,12 @@ import {
   Button, Card, Container, CustomLink, Page,
 } from '../../components';
 import { useGetUser } from '../../hooks';
-import { useGetVacanciesQuery } from '../../redux/api/vacancies';
+import { useGetVacanciesQuery } from '../../redux/api/vacancy';
 
 import styles from './vacancies.module.scss';
 import { USER_ROLE } from '../../redux/types/user';
 import { PATHS } from '../../constants/paths';
+import { priceRu } from '../../services';
 
 export const Vacancies = () => {
   const { t } = useTranslation();
@@ -20,14 +21,22 @@ export const Vacancies = () => {
   const { user, isLoading: isUserLoading } = useGetUser();
   const { data: vacancies, isLoading: isVacanciesLoading } = useGetVacanciesQuery({ page, pageSize });
   const countPage = Math.ceil((vacancies?.count || pageSize) / pageSize);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const changePage = (page: number) => {
     setPage(() => page);
+    containerRef.current?.scrollIntoView({
+      block: 'start',
+      behavior: 'smooth',
+    });
   };
 
   return (
     <Page>
-      <Container className={styles.content}>
+      <Container
+        ref={containerRef}
+        className={styles.content}
+      >
         <div className={styles.header}>
           {(user?.role || USER_ROLE.USER) >= USER_ROLE.HR && (
           <CustomLink
@@ -48,11 +57,7 @@ export const Vacancies = () => {
                 <Card className={styles.card}>
                   <h2 className={styles.vacancyTitle}>{title}</h2>
                   <h3 className={styles.companyName}>{company_name}</h3>
-                  <b className={styles.salary}>
-                    {salary}
-                    {' '}
-                    ₽
-                  </b>
+                  <b className={styles.salary}>{priceRu(salary)}</b>
                 </Card>
               </Link>
             </li>

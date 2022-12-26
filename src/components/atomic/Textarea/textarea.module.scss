@@ -1,0 +1,37 @@
+@import '../../../design/fonts.scss';
+
+.wrapper {
+  position: relative;
+}
+
+.label {
+  @include subhead-regular();
+  margin-bottom: 12px;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid var(--borderInputColor);
+  border-radius: 6px;
+  padding: 10px 12px 10px;
+  background: var(--inputBg);
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--borderInputColorFocus);
+  }
+
+  &::placeholder {
+    @include text-regular();
+    color: var(--placeholderColor);
+  }
+}
+
+.error {
+  @include caption-2-medium();
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  color: var(--errorColor);
+}
