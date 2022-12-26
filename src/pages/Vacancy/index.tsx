@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Container, Page, Card } from '../../components';
-import { useGetVacancyQuery } from '../../redux/api/vacancies';
+import { useGetVacancyQuery } from '../../redux/api/vacancy';
 import { IVacancyParams } from '../../redux/types/vacancies';
 
 import styles from './vacancy.module.scss';
+import { priceRu } from '../../services';
 
 export const Vacancy = () => {
   const { id } = useParams<IVacancyParams>();
@@ -20,9 +21,7 @@ export const Vacancy = () => {
               {data?.title}
             </h1>
             <b className={styles.salary}>
-              {data?.salary}
-              {' '}
-              ₽
+              {data?.salary && priceRu(data.salary)}
             </b>
           </div>
           <h2 className={styles.companyName}>

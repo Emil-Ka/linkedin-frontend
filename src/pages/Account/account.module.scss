@@ -40,3 +40,49 @@
 .desc {
   @include title-4-medium($weight: 400);
 }
+
+.resume {
+  margin-top: 30px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.resumeLabel {
+  @include title-3-medium();
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.resumeItem {
+  display: grid;
+  grid-template-areas: 'title . button'
+                        'salary . button';
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  background: var(--sky-5);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.resumeTitle {
+  @include title-4-medium($weight: 600);
+  grid-area: title;
+}
+
+.resumeSalary {
+  @include text-medium($weight: 500);
+  grid-area: salary;
+  color: var(--greenColor)
+}
+
+.resumeBtn {
+  grid-area: button;
+  align-self: center;
+}
+
+.resumeAdd {
+  margin-top: 30px;
+  align-self: center;
+}

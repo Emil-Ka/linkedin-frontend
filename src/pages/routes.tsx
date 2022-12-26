@@ -23,7 +23,7 @@ const routes = (user: IUser | null): RouteObject[] => [
   },
   {
     path: PATHS.ACCOUNT,
-    element: user ? <Account /> : <Navigate to={PATHS.LOGIN} />,
+    element: <Account />,
   },
   {
     path: PATHS.VACANCIES,

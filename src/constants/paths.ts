@@ -9,4 +9,6 @@ export const enum PATHS {
   ADD_VACANCY = '/add-vacancy',
   TESTS = '/tests',
   ACCOUNT = '/account',
+  RESUME = '/resume',
+  ADD_RESUME = '/add-resume',
 }

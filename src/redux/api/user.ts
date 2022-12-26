@@ -1,12 +1,8 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
 import { IRegistrationResponse, IRegistrationRequest, IUser } from '../types/user';
 import { ILoginData } from '../../pages/Login/types';
-import { baseQueryWithReauth } from '../services/base-query';
+import { baseApi } from './index';
 
-export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: baseQueryWithReauth,
+export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     register: build.mutation<IRegistrationResponse, IRegistrationRequest>({
       query: (body) => ({
@@ -21,6 +17,7 @@ export const userApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Resume'],
     }),
     getUser: build.query<IUser, void>({
       query: () => ({

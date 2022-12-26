@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
@@ -30,10 +30,12 @@ export const Registration: FC = () => {
   const dispatch = useTypedDispatch();
   const { t } = useTranslation();
   const [error, setError] = useState<string[] | null>(null);
+  const [redirect, setRedirect] = useState<boolean>(false);
   const [registration, { isLoading, error: errorResponse }] = useRegisterMutation();
 
-  const { setToken, resetUser } = bindActionCreators({
+  const { setToken, resetUser, setUser } = bindActionCreators({
     setToken: userSlice.setToken,
+    setUser: userSlice.setUser,
     resetUser: userSlice.resetUser,
   }, dispatch);
 
@@ -68,14 +70,16 @@ export const Registration: FC = () => {
 
     reset();
 
-    setToken({
-      token: payload.access,
-    });
-
+    setToken({ token: payload.access });
+    setUser({ user: payload.data });
     setCookie('token', payload.access, 1);
 
-    navigate(PATHS.MAIN);
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return <Navigate to={PATHS.MAIN} />;
+  }
 
   return (
     <Page className={styles.page}>
