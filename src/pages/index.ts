@@ -5,3 +5,5 @@ export * from './Account';
 export * from './Vacancies';
 export * from './Vacancy';
 export * from './AddVacancy';
+export * from './TestsPage';
+export * from './TestPage';

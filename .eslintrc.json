@@ -38,7 +38,8 @@
       "react/button-has-type": "off",
       "@typescript-eslint/no-empty-interface": "off",
       "no-param-reassign": "off",
-      "camelcase": "off"
+      "camelcase": "warn",
+      "@typescript-eslint/no-non-null-assertion": "off"
     },
     "settings": {
       "import/resolver": {

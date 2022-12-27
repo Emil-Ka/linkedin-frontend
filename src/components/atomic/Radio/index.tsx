@@ -4,7 +4,7 @@ import styles from './radio.module.scss';
 import { InputProps } from './radio.props';
 
 export const CheckBox = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, ...props }, ref: ForwardedRef<HTMLInputElement>) => {
+  ({ label, type = 'checkbox', ...props }, ref: ForwardedRef<HTMLInputElement>) => {
     const id = useId();
 
     return (
@@ -13,7 +13,7 @@ export const CheckBox = forwardRef<HTMLInputElement, InputProps>(
           className={styles.input}
           ref={ref}
           id={id}
-          type="checkbox"
+          type={type}
           {...props}
         />
         <div className={styles.marker} />
