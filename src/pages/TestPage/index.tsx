@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 
 import {
   Button,
-  Card, CheckBox, Container, Error, Page,
+  Card, ChoiceInput, Container, Error, Page,
 } from '../../components';
 import { useGetQuestionsQuery } from '../../redux/api/question';
 import { IQuestionParams } from '../../redux/types/question';
@@ -13,24 +14,30 @@ import { useGetTestQuery } from '../../redux/api/test';
 import { useGetOptionsQuery } from '../../redux/api/option';
 import { minToSec, timeForUI } from '../../services';
 import { IClientAnswersData } from '../../redux/types/test';
+import TimerIcon from './assets/timer.svg';
 
 import styles from './test-page.module.scss';
 
 export const TestPage = () => {
   const { register, getValues } = useForm<IClientAnswersData>();
+  const { t } = useTranslation();
 
   const timer = useRef<NodeJS.Timer | null>(null);
-  const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const { id: testId } = useParams<IQuestionParams>();
+
   const [questionNumber, setQuestionNumber] = useState<number>(0);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
-  const { data: questions, isSuccess: isQuestionsSuccess } = useGetQuestionsQuery({ id: testId });
-  const { data: test, isSuccess: isTestSuccess } = useGetTestQuery({ id: testId });
+  const [isFinish, setIsFinish] = useState<boolean>(false);
+
+  const { data: questions, isSuccess: isQuestionsSuccess, isLoading: isQuestionsLoading } = useGetQuestionsQuery({ id: testId });
+  const { data: test, isSuccess: isTestSuccess, isLoading: isTestLoading } = useGetTestQuery({ id: testId });
 
   const currentQuestion = questions?.[questionNumber - 1] || null;
   const questionsCount = questions?.length || 0;
 
-  const { data: options } = useGetOptionsQuery(
+  const { data: options, isLoading: isOptionsLoading } = useGetOptionsQuery(
     { id: currentQuestion ? currentQuestion.id : 0 },
     { skip: questionNumber === 0 || !currentQuestion },
   );
@@ -42,22 +49,46 @@ export const TestPage = () => {
     }
   };
 
+  const finishTest = () => {
+    setIsFinish(true);
+    console.log(getValues());
+  };
+
   const startTest = () => {
+    if (!test) {
+      return;
+    }
+
     setQuestionNumber((questionNumber) => questionNumber + 1);
 
     timer.current = setInterval(() => {
-      setElapsedTime((leftTime) => {
-        if (leftTime === minToSec(test!.time) - 1) {
+      setElapsedTime((elapsedTime) => {
+        if (elapsedTime === minToSec(test.time) - 1) {
           clearTimer();
+          finishTest();
         }
 
-        return leftTime + 1;
+        return elapsedTime + 1;
       });
     }, 1000);
   };
 
+  const scrollToUp = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const goToNextQuestion = () => {
     setQuestionNumber((questionNumber) => questionNumber + 1);
+    scrollToUp();
+  };
+
+  const goToPrevQuestion = () => {
+    setQuestionNumber((questionNumber) => questionNumber - 1);
+    scrollToUp();
   };
 
   useEffect(() => () => {
@@ -66,9 +97,13 @@ export const TestPage = () => {
 
   useEffect(() => {
     if (questionNumber > questionsCount) {
-      console.log(getValues());
+      finishTest();
     }
   }, [questionNumber]);
+
+  if (isQuestionsLoading || isTestLoading || isOptionsLoading) {
+    return 'Loading...';
+  }
 
   if (!isQuestionsSuccess) {
     return <Error errors={['С загрузкой вопросов произошла ошибка']} />;
@@ -80,7 +115,7 @@ export const TestPage = () => {
 
   return (
     <Page>
-      <Container>
+      <Container className={styles.content} ref={containerRef}>
         <h1 className={styles.title}>
           {test.name}
         </h1>
@@ -98,44 +133,63 @@ export const TestPage = () => {
               </Button>
             </>
           )}
-          {questionNumber > 0 && questionNumber <= questionsCount && (
+          {!isFinish && questionNumber > 0 && (
             <>
               <div className={styles.header}>
-                <span className={styles.score}>
-                  {questionNumber}
+                <div className={styles.score}>
+                  <span>{questionNumber}</span>
                   /
-                  {questionsCount}
-                </span>
-                <span className={styles.time}>
-                  {timeForUI(elapsedTime)}
+                  <span>{questionsCount}</span>
+                </div>
+                <TimerIcon className={cn(styles.timerIcon, {
+                  [styles.timerIcon_red]: minToSec(test.time) - elapsedTime <= 60,
+                })}
+                />
+                <div className={cn(styles.time, {
+                  [styles.time_red]: minToSec(test.time) - elapsedTime <= 60,
+                })}
+                >
+                  <span>{timeForUI(elapsedTime)}</span>
                   /
-                  {timeForUI(minToSec(test.time))}
-                </span>
+                  <span>{timeForUI(minToSec(test.time))}</span>
+                </div>
               </div>
               <div>
                 {currentQuestion?.photo && (
                   <img
                     src={currentQuestion.photo}
                     alt={t('test.alt.photo') || 'Изображение для вопроса не загрузилось'}
+                    className={styles.photo}
                   />
                 )}
                 <p className={styles.text}>{currentQuestion?.text}</p>
-                <form>
-                  {options && options.map(({ id, text }) => (
-                    <CheckBox
-                      key={id}
-                      type="radio"
-                      label={text}
-                      value={id}
-                      {...register(currentQuestion!.id.toString())}
-                    />
-                  ))}
-                </form>
-                <Button onClick={goToNextQuestion}>
-                  {t('test.buttons.next')}
-                </Button>
+                {options && options.map(({ id, text }) => (
+                  <ChoiceInput
+                    key={id}
+                    type="radio"
+                    label={text}
+                    value={id}
+                    className={styles.option}
+                    {...register(currentQuestion!.id.toString())}
+                  />
+                ))}
+                <div className={styles.buttons}>
+                  {questionNumber > 1 && (
+                    <Button onClick={goToPrevQuestion}>
+                      {t('test.buttons.prev')}
+                    </Button>
+                  )}
+                  <Button onClick={goToNextQuestion}>
+                    {questionNumber < questionsCount
+                      ? t('test.buttons.next')
+                      : t('test.buttons.end')}
+                  </Button>
+                </div>
               </div>
             </>
+          )}
+          {isFinish && (
+            <span>ВСЁ!</span>
           )}
         </Card>
       </Container>

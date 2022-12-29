@@ -4,6 +4,7 @@
   @include text-regular();
   display: flex;
   align-items: center;
+  gap: 12px;
 
   &:hover {
     /*Стили маркеров при наведении на весь блок radioButton*/
@@ -40,18 +41,15 @@
 
 .marker {
   /*Стиль стандартного маркера*/
-  content: "";
-  display: inline-block;
   cursor: pointer;
   outline: 1px solid var(--sky-60);
   border-radius: 50%;
-  height: 16px;
-  width: 16px;
+  min-height: 16px;
+  min-width: 16px;
 }
 
 .label {
   /*Стиль ярлыка*/
-  margin-left: 12px;
   cursor: pointer;
   color: var(--sky-80);
   transition: color 0.1s ease-in-out;

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
 import {
-  Button, Input, CheckBox, Page, Error,
+  Button, Input, ChoiceInput, Page, Error,
 } from '../../components';
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData, instanceOfIErrorResponse } from '../../redux/types/user';
@@ -121,7 +121,8 @@ export const Registration: FC = () => {
             required: t('registration.error') || 'Ошибка',
           })}
         />
-        <CheckBox
+        <ChoiceInput
+          type="checkbox"
           label={
             t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'
           }

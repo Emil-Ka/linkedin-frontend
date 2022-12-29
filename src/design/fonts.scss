@@ -1,11 +1,11 @@
-@mixin title-1-semibold($color: var(--sky-100), $size: var(--font-size-title-1), $weight: 600) {
+@mixin title-1-semibold($color: var(--sky-100), $size: var(--font-h1), $weight: 600) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.18;
   color: $color;
 }
 
-@mixin title-2-regular($color: var(--sky-100), $size: var(--font-size-title-2), $weight: 400) {
+@mixin title-2-regular($color: var(--sky-100), $size: var(--font-h2), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.2;
@@ -13,21 +13,21 @@
   color: $color;
 }
 
-@mixin title-3-medium($color: var(--sky-100), $size: var(--font-size-title-3), $weight: 500) {
+@mixin title-3-medium($color: var(--sky-100), $size: var(--font-h3), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.17;
   color: $color;
 }
 
-@mixin title-4-medium($color: var(--sky-100), $size: var(--font-size-title-4), $weight: 500) {
+@mixin title-4-medium($color: var(--sky-100), $size: var(--font-h4), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.17;
   color: $color;
 }
 
-@mixin headline-regular($color: var(--sky-100), $size: var(--font-size-headline), $weight: 400) {
+@mixin headline-regular($color: var(--sky-100), $size: var(--font-xxl), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.25;
@@ -35,7 +35,7 @@
   color: $color;
 }
 
-@mixin headline-medium($color: var(--sky-100), $size: var(--font-size-headline), $weight: 500) {
+@mixin headline-medium($color: var(--sky-100), $size: var(--font-xxl), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.25;
@@ -43,7 +43,7 @@
   color: $color;
 }
 
-@mixin text-regular($color: var(--sky-100), $size: var(--font-size-text), $weight: 400) {
+@mixin text-regular($color: var(--sky-100), $size: var(--font-xl), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.6;
@@ -51,7 +51,7 @@
   color: $color;
 }
 
-@mixin text-medium($color: var(--sky-100), $size: var(--font-size-text), $weight: 500) {
+@mixin text-medium($color: var(--sky-100), $size: var(--font-xl), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.6;
@@ -59,7 +59,7 @@
   color: $color;
 }
 
-@mixin subhead-regular($color: var(--sky-100), $size: var(--font-size-subhead), $weight: 400) {
+@mixin subhead-regular($color: var(--sky-100), $size: var(--font-l), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.29;
@@ -67,7 +67,7 @@
   color: $color;
 }
 
-@mixin subhead-medium($color: var(--sky-100), $size: var(--font-size-subhead), $weight: 500) {
+@mixin subhead-medium($color: var(--sky-100), $size: var(--font-l), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.29;
@@ -75,7 +75,7 @@
   color: $color;
 }
 
-@mixin subhead-bold($color: var(--sky-100), $size: var(--font-size-subhead), $weight: 700) {
+@mixin subhead-bold($color: var(--sky-100), $size: var(--font-l), $weight: 700) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.29;
@@ -83,7 +83,7 @@
   color: $color;
 }
 
-@mixin caption-1-regular($color: var(--sky-100), $size: var(--font-size-caption-1), $weight: 400) {
+@mixin caption-1-regular($color: var(--sky-100), $size: var(--font-m), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.23;
@@ -91,7 +91,7 @@
   color: $color;
 }
 
-@mixin caption-1-medium($color: var(--sky-100), $size: var(--font-size-caption-1), $weight: 500) {
+@mixin caption-1-medium($color: var(--sky-100), $size: var(--font-m), $weight: 500) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.23;
@@ -99,7 +99,7 @@
   color: $color;
 }
 
-@mixin caption-caps-1-medium($color: var(--sky-100), $size: var(--font-size-caption-1), $weight: 600) {
+@mixin caption-caps-1-medium($color: var(--sky-100), $size: var(--font-m), $weight: 600) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.23;
@@ -107,14 +107,14 @@
   color: $color;
 }
 
-@mixin caption-2-regular($color: var(--sky-100), $size: var(--font-size-caption-2), $weight: 400) {
+@mixin caption-2-regular($color: var(--sky-100), $size: var(--font-l), $weight: 400) {
   font-weight: $weight;
   font-size: $size;
   line-height: 1.17;
   color: $color;
 }
 
-@mixin caption-2-medium($color: var(--sky-100), $size: var(--font-size-caption-2), $weight: 500) {
+@mixin caption-2-medium($color: var(--sky-100), $size: var(--font-l), $weight: 500) {
   font-style: normal;
   font-weight: $weight;
   font-size: $size;

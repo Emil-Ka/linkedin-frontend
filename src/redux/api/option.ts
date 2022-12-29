@@ -11,4 +11,4 @@ export const optionApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetOptionsQuery } = optionApi;
+export const { useGetOptionsQuery, useLazyGetOptionsQuery } = optionApi;
