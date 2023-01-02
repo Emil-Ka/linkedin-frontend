@@ -1,0 +1,61 @@
+@import '../../design/fonts.scss';
+
+.content {
+  padding: 60px 0;
+}
+
+.title {
+  @include title-1-semibold($weight: 500);
+  text-align: center;
+}
+
+.question {
+  margin: 40px auto 0;
+  padding: 20px;
+  width: 70%;
+}
+
+.questionImage {
+  border-radius: 6px;
+  width: 100%;
+  margin: 0 auto;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.questionText {
+  margin-bottom: 20px;
+
+  @include title-3-medium();
+}
+
+.option {
+  padding: 8px;
+  background: var(--sky-5);
+  margin-bottom: 10px;
+
+  &_green {
+    color: var(--whiteColor);
+    background: var(--greenColor);
+  }
+
+  &_red {
+    color: var(--whiteColor);
+    background: var(--errorColor);
+  }
+}
+
+.totalResult {
+  @include title-3-medium();
+  display: block;
+  text-align: center;
+  margin-top: 60px;
+
+  &_green {
+    color: var(--greenColor);
+  }
+
+  &_red {
+    color: var(--errorColor);
+  }
+}

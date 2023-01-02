@@ -4,9 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
-import {
-  Page, Error, Input, Button,
-} from '../../components';
+import { Page, Error, Input, Button } from '../../components';
 import { ILoginData } from './types';
 import { useTypedDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/user';
@@ -24,11 +22,14 @@ export const Login = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [login, { isLoading, error: errorResponse }] = useLoginMutation();
 
-  const { setToken, resetUser, setUser } = bindActionCreators({
-    setToken: userSlice.setToken,
-    setUser: userSlice.setUser,
-    resetUser: userSlice.resetUser,
-  }, dispatch);
+  const { setToken, resetUser, setUser } = bindActionCreators(
+    {
+      setToken: userSlice.setToken,
+      setUser: userSlice.setUser,
+      resetUser: userSlice.resetUser,
+    },
+    dispatch,
+  );
 
   const {
     register,

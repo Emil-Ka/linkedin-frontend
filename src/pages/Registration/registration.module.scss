@@ -1,10 +1,11 @@
-@import '../../design/fonts.scss';
-@import '../../design/share.scss';
+@import "../../design/fonts.scss";
+@import "../../design/share.scss";
 
 .page {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   padding: 120px 0;
 }
 
@@ -13,15 +14,17 @@
 }
 
 .title {
-  @include title-2-regular();
   text-align: center;
+
+  @include title-2-regular();
 }
 
 .link {
-  @include caption-2-medium($color: var(--blueColor));
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     text-decoration: underline;
-  } 
+  }
+
+  @include caption-2-medium($color: var(--blueColor));
 }

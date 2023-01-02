@@ -6,6 +6,7 @@
 
 .timerIcon {
   grid-area: timerIcon;
+
   width: 20px;
   height: 20px;
 
@@ -21,12 +22,14 @@
 }
 
 .time {
+  width: 100px;
+
   color: var(--greenColor);
   grid-area: time;
-  width: 100px;
 
   span {
     display: inline-block;
+
     width: 46px;
   }
 

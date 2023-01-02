@@ -1,6 +1,6 @@
 export const enum PATHS {
   MAIN = '/',
-  REGISTRATION ='/registration',
+  REGISTRATION = '/registration',
   LOGIN = '/login',
   CONTACTS = '/contacts',
   ABOUT = '/about',
@@ -13,5 +13,5 @@ export const enum PATHS {
   RESUME = '/resume',
   ADD_RESUME = '/add-resume',
   RESULT = '/result',
-  RESULT_ID = '/result/:id'
+  RESULT_ID = '/result/:id',
 }

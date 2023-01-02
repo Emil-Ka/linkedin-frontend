@@ -1,11 +1,12 @@
-@import '../../../design/fonts.scss';
+@import "../../../design/fonts.scss";
 
 .wrapper {
-  background: var(--errorColor);
-  opacity: .8;
+  padding: 10px;
+
+  opacity: 0.8;
   border: 2px solid var(--errorColor);
   border-radius: 8px;
-  padding: 10px;
+  background: var(--errorColor);
 }
 
 .error {

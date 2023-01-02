@@ -1,9 +1,11 @@
-@import '../../design/fonts.scss';
+@import "../../design/fonts.scss";
 
 .title {
-  @include title-1-semibold($weight: 500);
-  text-align: center;
   margin-bottom: 30px;
+
+  text-align: center;
+
+  @include title-1-semibold($weight: 500);
 }
 
 .content {
@@ -11,42 +13,52 @@
 }
 
 .card {
+  width: 80%;
+  margin: 0 auto;
   padding: 30px;
 }
 
 .desc {
-  margin-bottom: 30px;
   max-width: 60%;
+  margin-bottom: 30px;
+
   white-space: pre-line;
 }
 
 .header {
   position: relative;
+
   display: flex;
   justify-content: flex-end;
+
   margin-bottom: 20px;
 }
 
 .score {
-  @include title-4-medium();
   position: absolute;
   left: 50%;
-  margin-left: -20px;
+
   display: flex;
   justify-content: space-between;
+
+  margin-left: -20px;
   gap: 5px;
+
+  @include title-4-medium();
 }
 
 .text {
-  @include title-3-medium();
   margin-bottom: 20px;
+
+  @include title-3-medium();
 }
 
 .photo {
-  border-radius: 6px;
   width: 100%;
   height: auto;
   margin-bottom: 30px;
+
+  border-radius: 6px;
 }
 
 .option {
@@ -56,15 +68,16 @@
 }
 
 .buttons {
-  margin-top: 40px;
   display: flex;
   justify-content: space-between;
+
+  margin-top: 40px;
 }
 
 .resultTitle {
-  @include title-3-medium();
-  text-align: center;
   margin: 60px 0;
+
+  text-align: center;
 
   &.success {
     color: var(--greenColor);
@@ -73,6 +86,8 @@
   &.failed {
     color: var(--errorColor);
   }
+
+  @include title-3-medium();
 }
 
 .emoji {

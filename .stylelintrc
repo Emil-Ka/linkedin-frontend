@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-order-config-standard"],
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "color-hex-case": "upper",
+    "selector-class-pattern": null,
+    "no-empty-source": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "import-notation": "string"
+  }
+}

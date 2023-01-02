@@ -17,19 +17,11 @@ export const Vacancy = () => {
       <Container className={styles.content}>
         <Card className={styles.card}>
           <div className={styles.header}>
-            <h1 className={styles.title}>
-              {data?.title}
-            </h1>
-            <b className={styles.salary}>
-              {data?.salary && priceRu(data.salary)}
-            </b>
+            <h1 className={styles.title}>{data?.title}</h1>
+            <b className={styles.salary}>{data?.salary && priceRu(data.salary)}</b>
           </div>
-          <h2 className={styles.companyName}>
-            {data?.company_name}
-          </h2>
-          <p className={styles.desc}>
-            {data?.text}
-          </p>
+          <h2 className={styles.companyName}>{data?.company_name}</h2>
+          <p className={styles.desc}>{data?.text}</p>
         </Card>
       </Container>
     </Page>

@@ -1,13 +1,13 @@
-@import '../../design/fonts.scss';
+@import "../../design/fonts.scss";
 
 .content {
-  padding: 40px 0;
   height: 100vh;
+  padding: 40px 0;
 }
 
 .card {
-  padding: 30px;
   height: 100%;
+  padding: 30px;
 }
 
 .header {
@@ -24,8 +24,9 @@
 }
 
 .companyName {
-  @include title-4-medium();
   margin-bottom: 40px;
+
+  @include title-4-medium();
 }
 
 .desc {

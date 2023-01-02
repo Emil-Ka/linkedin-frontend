@@ -1,58 +1,66 @@
 @import "../../../design/fonts.scss";
 
+.marker {
+  min-width: 16px;
+  min-height: 16px;
+
+  /* Стиль стандартного маркера */
+  cursor: pointer;
+
+  border-radius: 50%;
+  outline: 1px solid var(--sky-60);
+}
+
 .wrapper {
-  @include text-regular();
   display: flex;
   align-items: center;
   gap: 12px;
 
   &:hover {
-    /*Стили маркеров при наведении на весь блок radioButton*/
+    /* Стили маркеров при наведении на весь блок radioButton */
     :not(input:disabled, input:checked) + .marker {
-      /*Стили базового маркера, если он НЕ disabled и НЕ checked*/
+      /* Стили базового маркера, если он НЕ disabled и НЕ checked */
       outline: 1px solid var(--blueColor);
     }
   }
+
+  @include text-regular();
 }
 
 .input {
   display: none;
 
   &:checked {
-    /*Стили для маркеров, когда input checked*/
+    /* Стили для маркеров, когда input checked */
     & + .marker {
-      outline: 1px solid var(--blueColor);
-      border-radius: 50%;
       position: relative;
 
-      &:before {
-        content: "";
-        background: var(--blueColor);
+      border-radius: 50%;
+      outline: 1px solid var(--blueColor);
+
+      &::before {
         position: absolute;
         top: 4px;
         left: 4px;
+
         width: 8px;
         height: 8px;
+
+        content: "";
+
         border-radius: 50%;
+        background: var(--blueColor);
       }
     }
   }
 }
 
-.marker {
-  /*Стиль стандартного маркера*/
-  cursor: pointer;
-  outline: 1px solid var(--sky-60);
-  border-radius: 50%;
-  min-height: 16px;
-  min-width: 16px;
-}
-
 .label {
-  /*Стиль ярлыка*/
+  /* Стиль ярлыка */
   cursor: pointer;
-  color: var(--sky-80);
   transition: color 0.1s ease-in-out;
+
+  color: var(--sky-80);
 
   &:hover {
     color: var(--sky-100);

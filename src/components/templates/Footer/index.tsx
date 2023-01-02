@@ -21,26 +21,34 @@ export const Footer: FC<FooterProps> = ({ className, ...props }) => {
         <Logo isLink />
         <nav className={styles.navigation}>
           <ul className={styles.list}>
-            {links.map(({
-              path, label, show, isAuth, Component, excludeShow,
-            }) => (
-              isShow('footer', {
-                path, label, show, isAuth, Component, excludeShow,
-              }) && (
-              <li className={styles.item} key={path}>
-                { Component || (
-                <CustomLink to={path} type="footer">
-                  { label }
-                </CustomLink>
-                ) }
-              </li>
-              )
-            ))}
+            {links.map(
+              ({ path, label, show, isAuth, Component, excludeShow }) =>
+                isShow('footer', {
+                  path,
+                  label,
+                  show,
+                  isAuth,
+                  Component,
+                  excludeShow,
+                }) && (
+                  <li className={styles.item} key={path}>
+                    {Component || (
+                      <CustomLink to={path} type="footer">
+                        {label}
+                      </CustomLink>
+                    )}
+                  </li>
+                ),
+            )}
           </ul>
         </nav>
         <div className={styles.icons}>
-          <a href="https://t.me/em_kaaa"><TgIcon /></a>
-          <a href="vk.com"><VkIcon /></a>
+          <a href="https://t.me/em_kaaa">
+            <TgIcon />
+          </a>
+          <a href="vk.com">
+            <VkIcon />
+          </a>
         </div>
       </Container>
     </footer>

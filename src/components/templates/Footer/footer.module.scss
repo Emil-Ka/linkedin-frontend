@@ -1,16 +1,17 @@
-@import '../../../design/fonts.scss';
+@import "../../../design/fonts.scss";
 
 .footer {
   background: var(--whiteColor);
 }
 
 .content {
-  padding: 35px 0;
   display: grid;
-  grid-template-areas: 'logo nav icons';
+  align-items: start;
+
+  padding: 35px 0;
+  grid-template-areas: "logo nav icons";
   grid-template-columns: auto 1fr auto;
   gap: 90px;
-  align-items: start;
 }
 
 .icons {

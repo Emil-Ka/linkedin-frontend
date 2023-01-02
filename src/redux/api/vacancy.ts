@@ -1,5 +1,9 @@
 import {
-  IVacanciesResponse, IVacanciesQueries, IVacancy, IVacancyParams, IVacancyRequest,
+  IVacanciesResponse,
+  IVacanciesQueries,
+  IVacancy,
+  IVacancyParams,
+  IVacancyRequest,
 } from '../types/vacancies';
 import { baseApi } from './index';
 
@@ -11,7 +15,7 @@ export const vacancyApi = baseApi.injectEndpoints({
       }),
     }),
     getVacancy: build.query<IVacancy, IVacancyParams>({
-      query: ({ id = 1 }) => ({
+      query: ({ id }) => ({
         url: `/vacancies/${id}`,
       }),
     }),

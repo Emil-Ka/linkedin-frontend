@@ -15,18 +15,10 @@ export const TestsPage = () => {
   return (
     <Page>
       <Container className={styles.content}>
-        <h1 className={styles.title}>
-          {t('tests.title')}
-        </h1>
+        <h1 className={styles.title}>{t('tests.title')}</h1>
         <div className={styles.tests}>
-          {data?.map(({
-            id, name, cover, desc,
-          }) => (
-            <Link
-              key={id}
-              to={`${PATHS.TESTS}/${id}`}
-              className={styles.link}
-            >
+          {data?.map(({ id, name, cover, desc }) => (
+            <Link key={id} to={`${PATHS.TESTS}/${id}`} className={styles.link}>
               <Card className={styles.card}>
                 <img className={styles.img} src={cover} alt={name} />
                 <h2 className={styles.name}>{name}</h2>
