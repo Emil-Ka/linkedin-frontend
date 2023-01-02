@@ -49,40 +49,79 @@
   gap: 20px;
 }
 
-.resumeLabel {
+.label {
   @include title-3-medium();
   text-align: center;
   margin-bottom: 20px;
 }
 
-.resumeItem {
-  display: grid;
-  grid-template-areas: 'title . button'
-                        'salary . button';
-  grid-template-columns: auto 1fr auto;
-  gap: 10px;
-  background: var(--sky-5);
-  border-radius: 8px;
-  padding: 20px;
-}
-
 .resumeTitle {
   @include title-4-medium($weight: 600);
-  grid-area: title;
 }
 
 .resumeSalary {
-  @include text-medium($weight: 500);
-  grid-area: salary;
-  color: var(--greenColor)
+  @include text-medium($color: var(--greenColor));
 }
 
 .resumeBtn {
-  grid-area: button;
-  align-self: center;
+  text-align: center;
+  align-self: stretch;
 }
 
 .resumeAdd {
+  @include text-medium($color: var(--sky-90));
+  background: var(--sky-5);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.plusIcon {
+  width: 50px;
+  height: 50px;
+  fill: var(--sky-20);
+}
+
+.passedTests {
   margin-top: 30px;
-  align-self: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, 18%);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: var(--sky-5);
+}
+
+.testTitle {
+  @include title-4-medium($weight: 600);
+}
+
+.testCover {
+  border-radius: 6px;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+
+.result {
+  @include text-medium($color: var(--greenColor));
+}
+
+.testBtn {
+  text-align: center;
 }

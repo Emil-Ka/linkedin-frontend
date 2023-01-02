@@ -1,19 +1,23 @@
 import React, { ForwardedRef, forwardRef, useId } from 'react';
+import cn from 'classnames';
 
-import styles from './radio.module.scss';
-import { InputProps } from './radio.props';
+import { IChoiceInputProps } from './choice-input.props';
 
-export const CheckBox = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, ...props }, ref: ForwardedRef<HTMLInputElement>) => {
+import styles from './choice-input.module.scss';
+
+export const ChoiceInput = forwardRef<HTMLInputElement, IChoiceInputProps>(
+  ({
+    label, type, className, ...props
+  }, ref: ForwardedRef<HTMLInputElement>) => {
     const id = useId();
 
     return (
-      <div className={styles.wrapper}>
+      <div className={cn(styles.wrapper, className)}>
         <input
           className={styles.input}
           ref={ref}
           id={id}
-          type="checkbox"
+          type={type}
           {...props}
         />
         <div className={styles.marker} />
