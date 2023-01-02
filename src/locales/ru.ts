@@ -70,16 +70,27 @@ export const ru = {
   account: {
     titles: {
       resumes: 'Все резюме',
+      passed_tests: 'Пройденные тесты',
+    },
+    labels: {
+      result: 'Результат:',
+    },
+    text: {
+      salary: 'Зарплата не указана',
     },
     links: {
       more: 'Подробнее',
-      add_resume: '+ добавить резюме',
+      add_resume: 'Добавить резюме',
+      show_result: 'Показать результаты',
     },
   },
   tests: {
     title: 'Все тесты',
   },
   test: {
+    title: {
+      result: 'Вы решили тест правильно на',
+    },
     buttons: {
       start: 'Начать тест',
       next: 'Следующий вопрос',

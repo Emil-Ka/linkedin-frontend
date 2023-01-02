@@ -1,4 +1,4 @@
-import { ITestParams, ITestResponse } from '../types/test';
+import { ITestRequest, ITestResponse } from '../types/test';
 import { baseApi } from './index';
 
 export const testApi = baseApi.injectEndpoints({
@@ -8,7 +8,7 @@ export const testApi = baseApi.injectEndpoints({
         url: '/tests',
       }),
     }),
-    getTest: build.query<ITestResponse, ITestParams>({
+    getTest: build.query<ITestResponse, ITestRequest>({
       query: ({ id }) => ({
         url: `/tests/${id}`,
       }),
@@ -16,4 +16,4 @@ export const testApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetTestsQuery, useGetTestQuery } = testApi;
+export const { useGetTestsQuery, useGetTestQuery, useLazyGetTestQuery } = testApi;

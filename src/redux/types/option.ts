@@ -5,5 +5,5 @@ export interface IOptionResponse {
 }
 
 export interface IOptionRequest {
-  id: number;
+  questionId: number;
 }

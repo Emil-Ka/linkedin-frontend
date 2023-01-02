@@ -1,0 +1,36 @@
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timerIcon {
+  grid-area: timerIcon;
+  width: 20px;
+  height: 20px;
+
+  path {
+    stroke: var(--greenColor);
+  }
+
+  &_red {
+    path {
+      stroke: var(--errorColor);
+    }
+  }
+}
+
+.time {
+  color: var(--greenColor);
+  grid-area: time;
+  width: 100px;
+
+  span {
+    display: inline-block;
+    width: 46px;
+  }
+
+  &_red {
+    color: var(--errorColor);
+  }
+}

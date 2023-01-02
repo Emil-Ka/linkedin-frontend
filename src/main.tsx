@@ -18,9 +18,11 @@ if (!htmlRoot) {
 const reactRoot = createRoot(htmlRoot);
 
 reactRoot.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
 );

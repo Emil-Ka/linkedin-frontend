@@ -7,3 +7,4 @@ export * from './Avatar';
 export * from './Card';
 export * from './CustomLink';
 export * from './Textarea';
+export * from './Timer';

@@ -5,6 +5,6 @@ export interface IQuestionResponse {
   test: number;
 }
 
-export type IQuestionParams = {
-  id?: string;
+export interface IQuestionRequest {
+  testId: number;
 }

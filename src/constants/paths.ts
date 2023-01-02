@@ -12,4 +12,6 @@ export const enum PATHS {
   ACCOUNT = '/account',
   RESUME = '/resume',
   ADD_RESUME = '/add-resume',
+  RESULT = '/result',
+  RESULT_ID = '/result/:id'
 }

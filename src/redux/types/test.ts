@@ -6,8 +6,6 @@ export interface ITestResponse {
   desc: string | null;
 }
 
-export type ITestParams = {
-  id?: string;
+export interface ITestRequest {
+  id: number;
 }
-
-export type IClientAnswersData = Record<string, number>;

@@ -22,11 +22,8 @@
 
 .header {
   position: relative;
-  display: grid;
-  grid-template-areas: '. score . timerIcon time';
-  grid-template-columns: 1fr auto 1fr auto auto;
-  align-items: center;
-  gap: 5px;
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 20px;
 }
 
@@ -38,37 +35,6 @@
   display: flex;
   justify-content: space-between;
   gap: 5px;
-}
-
-.timerIcon {
-  grid-area: timerIcon;
-  width: 20px;
-  height: 20px;
-
-  path {
-    stroke: var(--greenColor);
-  }
-
-  &_red {
-    path {
-      stroke: var(--errorColor);
-    }
-  }
-}
-
-.time {
-  color: var(--greenColor);
-  grid-area: time;
-  width: 100px;
-
-  span {
-    display: inline-block;
-    width: 46px;
-  }
-
-  &_red {
-    color: var(--errorColor);
-  }
 }
 
 .text {
@@ -93,4 +59,22 @@
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
+}
+
+.resultTitle {
+  @include title-3-medium();
+  text-align: center;
+  margin: 60px 0;
+
+  &.success {
+    color: var(--greenColor);
+  }
+
+  &.failed {
+    color: var(--errorColor);
+  }
+}
+
+.emoji {
+  margin: 0 auto 60px;
 }
