@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { Avatar } from '../components';
 import { PATHS } from '../constants/paths';
-import { IUser } from '../redux/types/user';
-import { useTypedSelector } from './use-typed-selector';
+import { useGetUser } from './use-get-user';
+import { USER_ROLE } from '../redux/types/user';
 
 type AreaType = 'header' | 'footer';
 
@@ -16,6 +16,7 @@ interface ILink {
   show: AreaType[];
   isAuth: boolean[];
   excludeShow?: PATHS[];
+  role?: USER_ROLE;
 }
 
 type IsShowType = (area: AreaType, link: ILink) => boolean;
@@ -23,14 +24,15 @@ type IsShowType = (area: AreaType, link: ILink) => boolean;
 interface IUseLinksReturn {
   links: ILink[];
   isShow: IsShowType;
+  isLoading: boolean;
 }
 
 export const useLinks = (): IUseLinksReturn => {
   const { t } = useTranslation();
-  const { user } = useTypedSelector((state) => state.user);
+  const { user, isLoading } = useGetUser();
   const location = useLocation();
 
-  const isShow: IsShowType = (area, link): boolean => {
+  const isShow: IsShowType = (area, link) => {
     let condition = link.show.includes(area) && link.isAuth.includes(!!user);
 
     if (link.excludeShow?.length) {
@@ -62,13 +64,13 @@ export const useLinks = (): IUseLinksReturn => {
     {
       path: PATHS.CONTACTS,
       label: t('links.contacts'),
-      show: ['header', 'footer'],
+      show: ['footer'],
       isAuth: [true, false],
     },
     {
       path: PATHS.ABOUT,
       label: t('links.about'),
-      show: ['header', 'footer'],
+      show: ['footer'],
       isAuth: [true, false],
     },
     {
@@ -92,5 +94,5 @@ export const useLinks = (): IUseLinksReturn => {
     },
   ];
 
-  return { links, isShow };
+  return { links, isShow, isLoading };
 };

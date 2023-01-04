@@ -19,19 +19,12 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
         <nav className={styles.navigate}>
           <ul className={styles.list}>
             {links.map(
-              ({ path, label, show, isAuth, Component, excludeShow }) =>
-                isShow('header', {
-                  path,
-                  label,
-                  show,
-                  isAuth,
-                  Component,
-                  excludeShow,
-                }) && (
-                  <li className={styles.item} key={path}>
-                    {Component || (
-                      <CustomLink to={path} type="header">
-                        {label}
+              (link) =>
+                isShow('header', link) && (
+                  <li className={styles.item} key={link.path}>
+                    {link.Component || (
+                      <CustomLink to={link.path} type="header">
+                        {link.label}
                       </CustomLink>
                     )}
                   </li>
