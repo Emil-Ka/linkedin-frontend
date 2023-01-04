@@ -51,7 +51,7 @@ export interface IRegistrationRequest extends IRegistrationData {
   role: 0 | 1;
 }
 
-export interface IRegistrationResponse {
+export interface IUserResponse {
   access: string;
   data: IUser;
 }

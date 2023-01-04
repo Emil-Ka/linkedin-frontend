@@ -1,12 +1,13 @@
-@import '../../../design/fonts.scss';
+@import "../../../design/fonts.scss";
 
 .wrapper {
   position: relative;
 }
 
 .label {
-  @include subhead-regular();
   margin-bottom: 12px;
+
+  @include subhead-regular();
 }
 
 .inputWrapper {
@@ -15,34 +16,36 @@
 
 .input {
   width: 100%;
+  padding: 10px 12px;
+
   border: 1px solid var(--borderInputColor);
   border-radius: 6px;
-  padding: 10px 12px 10px;
   background: var(--inputBg);
 
   &:focus {
-    outline: none;
     border: 1px solid var(--borderInputColorFocus);
+    outline: none;
   }
 
   &::placeholder {
-    @include text-regular();
-    color: var(--placeholderColor);
+    @include text-regular($color: var(--placeholderColor));
   }
 }
 
 .error {
-  @include caption-2-medium();
   position: absolute;
   bottom: -18px;
   left: 0;
-  color: var(--errorColor);
+
+  @include caption-2-medium($color: var(--errorColor));
 }
 
 .eyeIcon {
   position: absolute;
   right: 14px;
   bottom: 50%;
+
   margin-bottom: -8px;
+
   cursor: pointer;
 }

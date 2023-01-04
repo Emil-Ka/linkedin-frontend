@@ -1,8 +1,28 @@
-@import '../../../design/fonts.scss';
+@import "../../../design/fonts.scss";
+
+.caption {
+  position: absolute;
+  right: 0;
+  bottom: -60%;
+
+  display: block;
+
+  padding: 3px 5px;
+
+  transition: opacity 0.5s linear;
+  white-space: nowrap;
+
+  opacity: 0;
+  border-radius: 8px;
+  background: var(--sky-10);
+
+  @include caption-2-medium();
+}
 
 .avatar {
-  display: block;
   position: relative;
+
+  display: block;
 
   &:hover {
     .caption {
@@ -14,20 +34,7 @@
 .img {
   width: 50px;
   height: 50px;
+
   border-radius: 50%;
   object-fit: cover;
-}
-
-.caption {
-  @include caption-2-medium();
-  position: absolute;
-  right: 0;
-  bottom: -60%;
-  display: block;
-  background: var(--sky-10);
-  padding: 3px 5px;
-  border-radius: 8px;
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity .5s linear;
 }

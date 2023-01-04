@@ -9,9 +9,7 @@ import styles from './page.module.scss';
 export const Page: FC<PageProps> = ({ children, ...props }) => (
   <div className={styles.page}>
     <Header />
-    <main {...props}>
-      {children}
-    </main>
+    <main {...props}>{children}</main>
     <Footer />
   </div>
 );

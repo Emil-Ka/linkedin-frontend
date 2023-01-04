@@ -1,11 +1,14 @@
-@import '../../../design/fonts.scss';
+@import "../../../design/fonts.scss";
 
 .logo {
   display: block;
-  text-decoration: none;
-  background: var(--nevaColor);
+
   padding: 3px 7px;
+
+  text-decoration: none;
+
   border-radius: 7px;
+  background: var(--nevaColor);
 }
 
 .label {

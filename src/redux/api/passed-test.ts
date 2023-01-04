@@ -12,4 +12,4 @@ export const passedTestApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLazyGetPassedTestsQuery } = passedTestApi;
+export const { useGetPassedTestsQuery, useLazyGetPassedTestsQuery } = passedTestApi;

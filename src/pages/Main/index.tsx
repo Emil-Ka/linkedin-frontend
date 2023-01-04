@@ -4,9 +4,11 @@ import { useGetUser } from '../../hooks';
 import { Page } from '../../components';
 
 export const Main: FC = () => {
-  const { user } = useGetUser();
+  const { user, isLoading } = useGetUser();
 
-  console.log('main');
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <Page>

@@ -1,3 +1,3 @@
-export type IQuestionParams = {
+export type QuestionParamsType = {
   id: string;
-}
+};

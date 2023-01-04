@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
 import { useTypedSelector, useTypedDispatch } from '.';
-import { useGetUserQuery } from '../redux/api/user';
+import { useLazyGetUserQuery } from '../redux/api/user';
 import * as userSlice from '../redux/slices/user';
 
 export const useGetUser = () => {
@@ -10,19 +10,24 @@ export const useGetUser = () => {
   const { setUser } = bindActionCreators({ setUser: userSlice.setUser }, dispatch);
   const { user } = useTypedSelector((state) => state.user);
 
-  const userQuery = useGetUserQuery(undefined, {
-    skip: !!user,
-  });
+  const [getUser, { isLoading, error }] = useLazyGetUserQuery();
+
+  const fetchUser = async () => {
+    const user = await getUser().unwrap();
+    setUser({ user });
+  };
 
   useEffect(() => {
-    if (userQuery.data) {
-      setUser({ user: userQuery.data });
+    console.log('user', user);
+    if (!user) {
+      fetchUser();
     }
-  }, [userQuery.data]);
+    // eslint-disable-next-line
+  }, [user]);
 
   return {
     user,
-    setUser,
-    ...userQuery,
+    isLoading,
+    error,
   };
 };

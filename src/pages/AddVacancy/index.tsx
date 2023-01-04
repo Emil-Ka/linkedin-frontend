@@ -4,9 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
-import {
-  Page, Error, Input, Button, Container, Textarea,
-} from '../../components';
+import { Page, Error, Input, Button, Container, Textarea } from '../../components';
 import { instanceOfIErrorResponse } from '../../redux/types/user';
 import { setCookie } from '../../models/cookie';
 import { PATHS } from '../../constants/paths';
@@ -35,7 +33,7 @@ export const AddVacancy = () => {
       await addVacancy(data).unwrap();
       setRedirect(true);
     } catch (err) {
-      setError((prev) => (prev && [...prev, 'Error']));
+      setError((prev) => prev && [...prev, 'Error']);
     }
   };
 

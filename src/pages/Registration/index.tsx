@@ -4,9 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
-import {
-  Button, Input, ChoiceInput, Page, Error,
-} from '../../components';
+import { Button, Input, ChoiceInput, Page, Error } from '../../components';
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData, instanceOfIErrorResponse } from '../../redux/types/user';
 import { convertApiData } from '../../services/convert-api-data';
@@ -33,11 +31,14 @@ export const Registration: FC = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [registration, { isLoading, error: errorResponse }] = useRegisterMutation();
 
-  const { setToken, resetUser, setUser } = bindActionCreators({
-    setToken: userSlice.setToken,
-    setUser: userSlice.setUser,
-    resetUser: userSlice.resetUser,
-  }, dispatch);
+  const { setToken, resetUser, setUser } = bindActionCreators(
+    {
+      setToken: userSlice.setToken,
+      setUser: userSlice.setUser,
+      resetUser: userSlice.resetUser,
+    },
+    dispatch,
+  );
 
   const {
     register,
@@ -105,9 +106,7 @@ export const Registration: FC = () => {
         <Input
           type="email"
           label={t('registration.labels.email') || 'Email'}
-          placeholder={
-            t('registration.placeholders.email') || 'ivan@google.com'
-          }
+          placeholder={t('registration.placeholders.email') || 'ivan@google.com'}
           error={errors.email}
           {...register('email', {
             required: t('registration.error') || 'Ошибка',
@@ -123,9 +122,7 @@ export const Registration: FC = () => {
         />
         <ChoiceInput
           type="checkbox"
-          label={
-            t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'
-          }
+          label={t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'}
           {...register('isHr')}
         />
         <Button type="submit" disabled={!isValid} loading={isLoading}>

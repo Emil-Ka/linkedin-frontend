@@ -6,7 +6,8 @@ const addZero = (num: number) => {
   return `${num}`;
 };
 
-export const timeForUI = (sec: number): string => `${addZero(Math.floor(sec / 60))}:${addZero(sec % 60)}`;
+export const timeForUI = (sec: number): string =>
+  `${addZero(Math.floor(sec / 60))}:${addZero(Math.floor(sec) % 60)}`;
 
 export const minToSec = (min: number): number => min * 60;
 

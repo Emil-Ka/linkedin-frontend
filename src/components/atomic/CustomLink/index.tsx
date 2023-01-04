@@ -6,9 +6,7 @@ import { ICustomLinkProps } from './custom-link.props';
 
 import styles from './custom-link.module.scss';
 
-export const CustomLink: FC<ICustomLinkProps> = ({
-  children, className, type, ...props
-}) => (
+export const CustomLink: FC<ICustomLinkProps> = ({ children, className, type, ...props }) => (
   <Link
     className={cn(styles.link, className, {
       [styles.header]: type === 'header',

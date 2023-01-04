@@ -1,4 +1,4 @@
-@import '../../design/fonts.scss';
+@import "../../design/fonts.scss";
 
 .content {
   padding: 40px 0;
@@ -7,6 +7,7 @@
 .header {
   display: flex;
   justify-content: flex-end;
+
   margin-bottom: 30px;
 }
 
@@ -33,15 +34,18 @@
 }
 
 .salary {
-  @include text-medium($weight: 600);
   display: block;
+
   margin-top: 30px;
+
+  @include text-medium($weight: 600);
 }
 
 .pagination {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+
   margin-top: 30px;
+  gap: 5px;
 }

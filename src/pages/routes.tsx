@@ -2,7 +2,16 @@ import React from 'react';
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 
 import {
-  Registration, Main, Account, Login, Vacancies, Vacancy, AddVacancy, TestsPage, TestPage,
+  Registration,
+  Main,
+  Account,
+  Login,
+  Vacancies,
+  Vacancy,
+  AddVacancy,
+  TestsPage,
+  TestPage,
+  Result,
 } from './index';
 import { PATHS } from '../constants/paths';
 import { useTypedSelector } from '../hooks';
@@ -35,7 +44,12 @@ const routes = (user: IUser | null): RouteObject[] => [
   },
   {
     path: PATHS.ADD_VACANCY,
-    element: (user?.role || USER_ROLE.USER) >= USER_ROLE.HR ? <AddVacancy /> : <Navigate to={PATHS.LOGIN} />,
+    element:
+      (user?.role || USER_ROLE.USER) >= USER_ROLE.HR ? (
+        <AddVacancy />
+      ) : (
+        <Navigate to={PATHS.LOGIN} />
+      ),
   },
   {
     path: PATHS.TESTS,
@@ -44,6 +58,10 @@ const routes = (user: IUser | null): RouteObject[] => [
   {
     path: PATHS.TEST_ID,
     element: <TestPage />,
+  },
+  {
+    path: PATHS.RESULT_ID,
+    element: <Result />,
   },
 ];
 
