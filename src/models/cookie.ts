@@ -1,17 +1,19 @@
-export const setCookie = (name: string, value: string, days?: number): void => {
+type CookieName = 'token';
+
+export const setCookie = (name: CookieName, value: string, days?: number): void => {
   let expires = '';
 
   if (days) {
     const date = new Date();
 
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     expires = `; expires=${date.toUTCString()}`;
   }
 
   document.cookie = `${name}=${value}${expires}; path=/`;
 };
 
-export const getCookie = (name: string): string | null => {
+export const getCookie = (name: CookieName): string | null => {
   const nameEqual = `${name}=`;
   const cookieArray = document.cookie.split(';');
 
@@ -28,4 +30,8 @@ export const getCookie = (name: string): string | null => {
   }
 
   return null;
+};
+
+export const resetCookie = (name: CookieName) => {
+  setCookie(name, '');
 };

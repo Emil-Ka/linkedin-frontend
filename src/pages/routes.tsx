@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
+import { RouteObject, useRoutes } from 'react-router-dom';
 
 import {
   Registration,
@@ -12,12 +12,11 @@ import {
   TestsPage,
   TestPage,
   Result,
+  AddTest,
 } from './index';
 import { PATHS } from '../constants/paths';
-import { useTypedSelector } from '../hooks';
-import { IUser, USER_ROLE } from '../redux/types/user';
 
-const routes = (user: IUser | null): RouteObject[] => [
+const routes: RouteObject[] = [
   {
     path: PATHS.MAIN,
     element: <Main />,
@@ -36,20 +35,15 @@ const routes = (user: IUser | null): RouteObject[] => [
   },
   {
     path: PATHS.VACANCIES,
-    element: user ? <Vacancies /> : <Navigate to={PATHS.LOGIN} />,
+    element: <Vacancies />,
   },
   {
     path: PATHS.VACANCY_ID,
-    element: user ? <Vacancy /> : <Navigate to={PATHS.LOGIN} />,
+    element: <Vacancy />,
   },
   {
     path: PATHS.ADD_VACANCY,
-    element:
-      (user?.role || USER_ROLE.USER) >= USER_ROLE.HR ? (
-        <AddVacancy />
-      ) : (
-        <Navigate to={PATHS.LOGIN} />
-      ),
+    element: <AddVacancy />,
   },
   {
     path: PATHS.TESTS,
@@ -63,11 +57,14 @@ const routes = (user: IUser | null): RouteObject[] => [
     path: PATHS.RESULT_ID,
     element: <Result />,
   },
+  {
+    path: PATHS.ADD_TEST,
+    element: <AddTest />,
+  },
 ];
 
 export const AppRouter = () => {
-  const { user } = useTypedSelector((state) => state.user);
-  const component = useRoutes(routes(user));
+  const component = useRoutes(routes);
 
   return component;
 };

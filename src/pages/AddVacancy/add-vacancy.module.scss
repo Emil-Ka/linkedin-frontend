@@ -1,20 +1,5 @@
 @import "../../design/share.scss";
-@import "../../design/fonts.scss";
 
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 60px 0;
-}
-
-.form {
-  @extend %form;
-}
-
-.title {
-  text-align: center;
-
-  @include title-2-regular();
+.page {
+  @extend %pageForm;
 }

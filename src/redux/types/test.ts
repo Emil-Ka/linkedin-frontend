@@ -1,4 +1,4 @@
-export interface ITestResponse {
+export interface IGetTestResponse {
   id: number;
   name: string;
   cover: string;
@@ -6,6 +6,15 @@ export interface ITestResponse {
   desc: string | null;
 }
 
-export interface ITestRequest {
+export interface IGetTestRequest {
   id: number;
 }
+
+export interface IAddTestData {
+  name: string;
+  cover: FileList;
+  time: number;
+  desc: string;
+}
+
+export type IAddTestRequest = FormData;

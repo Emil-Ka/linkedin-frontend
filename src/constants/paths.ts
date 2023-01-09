@@ -15,4 +15,5 @@ export const enum PATHS {
   RESULT = '/result',
   RESULT_ID = '/result/:id',
   ADMIN = '/admin',
+  ADD_TEST = '/add-test',
 }

@@ -1,12 +1,29 @@
 import { initRegistrationState } from '../../pages/Registration';
+import { IAddTestData, IAddTestRequest } from '../../redux/types/test';
 import { IRegistrationInitData, IRegistrationRequest } from '../../redux/types/user';
 
 export const convertApiData = {
-  registration: (data: IRegistrationInitData): IRegistrationRequest => ({
-    first_name: data.first_name,
-    last_name: data.last_name,
-    email: data.email,
-    password: data.password,
-    role: data.isHr ? 1 : 0,
+  registration: ({ isHr, ...data }: IRegistrationInitData): IRegistrationRequest => ({
+    ...data,
+    role: isHr ? 1 : 0,
   }),
+  addTest: (data: IAddTestData): IAddTestRequest => {
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value instanceof FileList) {
+        formData.append(key, value[0]);
+        return;
+      }
+
+      if (typeof value === 'number') {
+        formData.append(key, value.toString());
+        return;
+      }
+
+      formData.append(key, value);
+    });
+
+    return formData;
+  },
 };

@@ -16,7 +16,7 @@ interface ILink {
   show: AreaType[];
   isAuth: boolean[];
   excludeShow?: PATHS[];
-  role?: USER_ROLE;
+  role?: USER_ROLE[];
 }
 
 type IsShowType = (area: AreaType, link: ILink) => boolean;
@@ -37,6 +37,10 @@ export const useLinks = (): IUseLinksReturn => {
 
     if (link.excludeShow?.length) {
       condition = condition && !link.excludeShow.includes(location.pathname as PATHS);
+    }
+
+    if (link.role && user) {
+      condition = condition && link.role.includes(user.role);
     }
 
     return condition;
@@ -86,11 +90,18 @@ export const useLinks = (): IUseLinksReturn => {
       isAuth: [true],
     },
     {
+      path: PATHS.ADMIN,
+      label: t('links.admin'),
+      show: ['header'],
+      isAuth: [true],
+      role: [USER_ROLE.ADMIN],
+    },
+    {
       path: PATHS.ACCOUNT,
       Component: <Avatar to={PATHS.ACCOUNT} />,
       show: ['header'],
       isAuth: [true],
-      excludeShow: [PATHS.ACCOUNT],
+      excludeShow: [PATHS.ACCOUNT, PATHS.LOGIN, PATHS.REGISTRATION],
     },
   ];
 
