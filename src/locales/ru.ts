@@ -43,6 +43,7 @@ export const ru = {
     tests: 'Тесты',
     vacancies: 'Вакансии',
     account: 'Личный кабинет',
+    admin: 'Админка',
   },
   vacancies: {
     buttons: {
@@ -104,9 +105,35 @@ export const ru = {
       result: 'Ваш итоговый результат за тест:',
     },
   },
+  add_test: {
+    title: 'Создайте новый тест',
+    labels: {
+      name: 'Название теста',
+      desc: 'Описание теста',
+      time: 'Время на прохождение в минутах',
+      images: 'Обложка для теста',
+    },
+    placeholders: {
+      name: 'React Junior',
+      desc: 'Этот тест предназначен для ...',
+      time: '20',
+    },
+    buttons: {
+      submit: 'Создать тест',
+    },
+  },
   utils: {
     photo: {
       alt: 'Изображение для вопроса не загрузилось',
+    },
+    errors: {
+      required: 'Это обязательное поле',
+    },
+  },
+  file_input: {
+    labels: {
+      drug_files: 'Перетащите файлы сюда или',
+      upload_files: 'загрузите фотографии',
     },
   },
 };

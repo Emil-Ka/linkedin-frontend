@@ -88,43 +88,39 @@ export const Registration: FC = () => {
         <h1 className={styles.title}>{t('registration.title')}</h1>
         {error && <Error errors={error} />}
         <Input
-          label={t('registration.labels.firstName') || 'Имя'}
-          placeholder={t('registration.placeholders.firstName') || 'Иван'}
+          label={t('registration.labels.firstName')!}
+          placeholder={t('registration.placeholders.firstName')!}
           error={errors.first_name}
           {...register('first_name', {
-            required: t('registration.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
         <Input
-          label={t('registration.labels.lastName') || 'Фамилия'}
-          placeholder={t('registration.placeholders.lastName') || 'Иванов'}
+          label={t('registration.labels.lastName')!}
+          placeholder={t('registration.placeholders.lastName')!}
           error={errors.last_name}
           {...register('last_name', {
-            required: t('registration.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
         <Input
           type="email"
-          label={t('registration.labels.email') || 'Email'}
-          placeholder={t('registration.placeholders.email') || 'ivan@google.com'}
+          label={t('registration.labels.email')!}
+          placeholder={t('registration.placeholders.email')!}
           error={errors.email}
           {...register('email', {
-            required: t('registration.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
         <Input
           type="password"
-          label={t('registration.labels.password') || 'Пароль'}
+          label={t('registration.labels.password')!}
           error={errors.password}
           {...register('password', {
-            required: t('registration.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
-        <ChoiceInput
-          type="checkbox"
-          label={t('registration.labels.role') || 'Хотите зарегестрироваться как HR?'}
-          {...register('isHr')}
-        />
+        <ChoiceInput type="checkbox" label={t('registration.labels.role')!} {...register('isHr')} />
         <Button type="submit" disabled={!isValid} loading={isLoading}>
           {t('registration.buttons.submit')}
         </Button>

@@ -26,9 +26,7 @@
   }
 
   &::placeholder {
-    color: var(--placeholderColor);
-
-    @include text-regular();
+    @include text-regular($color: var(--placeholderColor));
   }
 }
 
@@ -37,7 +35,5 @@
   bottom: -18px;
   left: 0;
 
-  color: var(--errorColor);
-
-  @include caption-2-medium();
+  @include caption-2-medium($color: var(--errorColor));
 }

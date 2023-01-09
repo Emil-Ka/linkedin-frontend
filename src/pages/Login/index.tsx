@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
 
@@ -10,18 +10,20 @@ import { useTypedDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/user';
 import { instanceOfIErrorResponse } from '../../redux/types/user';
 import * as userSlice from '../../redux/slices/user';
-import { setCookie } from '../../models/cookie';
+import { resetCookie, setCookie } from '../../models/cookie';
 import { PATHS } from '../../constants/paths';
 
-import styles from '../Registration/registration.module.scss';
+import styles from './login.module.scss';
 
 export const Login = () => {
-  const dispatch = useTypedDispatch();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const [error, setError] = useState<string[] | null>(null);
-  const [redirect, setRedirect] = useState<boolean>(false);
+
   const [login, { isLoading, error: errorResponse }] = useLoginMutation();
 
+  const dispatch = useTypedDispatch();
   const { setToken, resetUser, setUser } = bindActionCreators(
     {
       setToken: userSlice.setToken,
@@ -42,6 +44,7 @@ export const Login = () => {
 
   useEffect(() => {
     resetUser();
+    resetCookie('token');
     // eslint-disable-next-line
   }, []);
 
@@ -66,12 +69,8 @@ export const Login = () => {
     setUser({ user: payload.data });
     setCookie('token', payload.access, 1);
 
-    setRedirect(true);
+    navigate(PATHS.MAIN);
   };
-
-  if (redirect) {
-    return <Navigate to={PATHS.MAIN} />;
-  }
 
   return (
     <Page className={styles.page}>
@@ -79,19 +78,19 @@ export const Login = () => {
         <h1 className={styles.title}>{t('login.title')}</h1>
         {error && <Error errors={error} />}
         <Input
-          label={t('login.labels.email') || 'Электронная почта'}
-          placeholder={t('login.placeholders.email') || 'ivan@gmail.com'}
+          label={t('login.labels.email')!}
+          placeholder={t('login.placeholders.email')!}
           error={errors.email}
           {...register('email', {
-            required: t('registration.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
         <Input
           type="password"
-          label={t('login.labels.password') || 'Пароль'}
+          label={t('login.labels.password')!}
           error={errors.password}
           {...register('password', {
-            required: t('login.error') || 'Ошибка',
+            required: t('utils.errors.required')!,
           })}
         />
         <Button type="submit" disabled={!isValid} loading={isLoading}>

@@ -14,12 +14,18 @@ import { priceRu } from '../../services';
 
 export const Vacancies = () => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
-  const { user, isLoading: isUserLoading } = useGetUser();
-  const { data: vacancies, isLoading: isVacanciesLoading } = useGetVacanciesQuery({ page, pageSize });
+
+  const { user, isLoading } = useGetUser();
+
+  const { data: vacancies, isLoading: isVacanciesLoading } = useGetVacanciesQuery({
+    page,
+    pageSize,
+  });
   const countPage = Math.ceil((vacancies?.count || pageSize) / pageSize);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const changePage = (page: number) => {
     setPage(() => page);

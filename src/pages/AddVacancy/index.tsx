@@ -41,48 +41,46 @@ export const AddVacancy = () => {
     return <Navigate to={PATHS.VACANCIES} />;
   }
   return (
-    <Page>
-      <Container className={styles.content}>
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <h1 className={styles.title}>{t('add_vacancy.title')}</h1>
-          {error && <Error errors={error} />}
-          <Input
-            label={t('add_vacancy.labels.title') || 'Заголовок вакансии'}
-            placeholder={t('add_vacancy.placeholders.title') || 'Senior GO Developer'}
-            error={errors.title}
-            {...register('title', {
-              required: t('add_vacancy.error') || 'Ошибка',
-            })}
-          />
-          <Input
-            label={t('add_vacancy.labels.company_name') || 'Название компании'}
-            placeholder={t('add_vacancy.placeholders.company_name') || 'ООО Домклик'}
-            error={errors.company_name}
-            {...register('company_name', {
-              required: t('add_vacancy.error') || 'Ошибка',
-            })}
-          />
-          <Input
-            type="number"
-            label={t('add_vacancy.labels.salary') || 'Размер зарплаты'}
-            placeholder={t('add_vacancy.placeholders.salary') || '120 000'}
-            error={errors.salary}
-            {...register('salary', {
-              required: t('add_vacancy.error') || 'Ошибка',
-            })}
-          />
-          <Textarea
-            label={t('add_vacancy.labels.text') || 'Текст вакансии'}
-            error={errors.text}
-            {...register('text', {
-              required: t('add_vacancy.error') || 'Ошибка',
-            })}
-          />
-          <Button type="submit" disabled={!isValid}>
-            {t('add_vacancy.buttons.submit')}
-          </Button>
-        </form>
-      </Container>
+    <Page className={styles.page}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <h1 className={styles.title}>{t('add_vacancy.title')}</h1>
+        {error && <Error errors={error} />}
+        <Input
+          label={t('add_vacancy.labels.title')!}
+          placeholder={t('add_vacancy.placeholders.title')!}
+          error={errors.title}
+          {...register('title', {
+            required: t('utils.errors.required')!,
+          })}
+        />
+        <Input
+          label={t('add_vacancy.labels.company_name')!}
+          placeholder={t('add_vacancy.placeholders.company_name')!}
+          error={errors.company_name}
+          {...register('company_name', {
+            required: t('utils.errors.required')!,
+          })}
+        />
+        <Input
+          type="number"
+          label={t('add_vacancy.labels.salary')!}
+          placeholder={t('add_vacancy.placeholders.salary')!}
+          error={errors.salary}
+          {...register('salary', {
+            required: t('utils.errors.required')!,
+          })}
+        />
+        <Textarea
+          label={t('add_vacancy.labels.text')!}
+          error={errors.text}
+          {...register('text', {
+            required: t('utils.errors.required')!,
+          })}
+        />
+        <Button type="submit" disabled={!isValid}>
+          {t('add_vacancy.buttons.submit')}
+        </Button>
+      </form>
     </Page>
   );
 };

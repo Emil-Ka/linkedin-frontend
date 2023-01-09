@@ -33,8 +33,8 @@ export interface IErrorResponse {
   status: number;
 }
 
-// Type Guard
-export const instanceOfIErrorResponse = (error: any): error is IErrorResponse => 'data' in error && 'status' in error;
+export const instanceOfIErrorResponse = (error: any): error is IErrorResponse =>
+  'data' in error && 'status' in error;
 
 export interface IRegistrationData {
   first_name: string;
