@@ -62,7 +62,7 @@ export const FileInput = forwardRef<HTMLInputElement, IFileInputProps>(
     };
 
     return (
-      <div>
+      <div className={styles.content}>
         {label && (
           <label htmlFor={id} className={styles.label}>
             {label}

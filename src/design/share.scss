@@ -6,7 +6,7 @@
   justify-content: center;
   padding: 120px 0;
   
-  .form {
+  form {
     background: var(--formBg);
     padding: 60px 80px;
     border-radius: 12px;
@@ -20,13 +20,13 @@
     }
   }
   
-  .title {
+  h1 {
     text-align: center;
   
     @include title-2-regular();
   }
   
-  .link {
+  a {
     transition: all 0.2s ease-in-out;
   
     &:hover {

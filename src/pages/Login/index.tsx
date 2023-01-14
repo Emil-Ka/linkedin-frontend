@@ -74,8 +74,8 @@ export const Login = () => {
 
   return (
     <Page className={styles.page}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={styles.title}>{t('login.title')}</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>{t('login.title')}</h1>
         {error && <Error errors={error} />}
         <Input
           label={t('login.labels.email')!}
@@ -96,9 +96,7 @@ export const Login = () => {
         <Button type="submit" disabled={!isValid} loading={isLoading}>
           {t('login.buttons.submit')}
         </Button>
-        <Link className={styles.link} to={PATHS.REGISTRATION}>
-          {t('login.link')}
-        </Link>
+        <Link to={PATHS.REGISTRATION}>{t('login.link')}</Link>
       </form>
     </Page>
   );

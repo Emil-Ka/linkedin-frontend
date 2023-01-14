@@ -74,6 +74,7 @@
     "react-i18next": "^12.1.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
+    "react-select": "^5.7.0",
     "url-loader": "^4.1.1",
     "uuid": "^9.0.0"
   }

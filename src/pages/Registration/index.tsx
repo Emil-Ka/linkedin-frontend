@@ -84,8 +84,8 @@ export const Registration: FC = () => {
 
   return (
     <Page className={styles.page}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={styles.title}>{t('registration.title')}</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>{t('registration.title')}</h1>
         {error && <Error errors={error} />}
         <Input
           label={t('registration.labels.firstName')!}
@@ -124,9 +124,7 @@ export const Registration: FC = () => {
         <Button type="submit" disabled={!isValid} loading={isLoading}>
           {t('registration.buttons.submit')}
         </Button>
-        <Link className={styles.link} to={PATHS.LOGIN}>
-          {t('registration.link')}
-        </Link>
+        <Link to={PATHS.LOGIN}>{t('registration.link')}</Link>
       </form>
     </Page>
   );
