@@ -8,7 +8,16 @@ export const questionApi = baseApi.injectEndpoints({
         url: `/questions?test=${testId}`,
       }),
     }),
+    addQuestion: build.mutation<IQuestionResponse, FormData>({
+      query: (body) => ({
+        url: '/questions/create/',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Tests'],
+    }),
   }),
 });
 
-export const { useGetQuestionsQuery, useLazyGetQuestionsQuery } = questionApi;
+export const { useGetQuestionsQuery, useLazyGetQuestionsQuery, useAddQuestionMutation } =
+  questionApi;

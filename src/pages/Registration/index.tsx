@@ -7,7 +7,7 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import { Button, Input, ChoiceInput, Page, Error } from '../../components';
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData, instanceOfIErrorResponse } from '../../redux/types/user';
-import { convertApiData } from '../../services/convert-api-data';
+import { convertData } from '../../services/convert-data';
 import * as userSlice from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
 import { useTypedDispatch } from '../../hooks';
@@ -67,7 +67,7 @@ export const Registration: FC = () => {
   }, [errorResponse]);
 
   const onSubmit = async (data: IRegistrationInitData) => {
-    const payload = await registration(convertApiData.registration(data)).unwrap();
+    const payload = await registration(convertData.registration(data)).unwrap();
 
     reset();
 

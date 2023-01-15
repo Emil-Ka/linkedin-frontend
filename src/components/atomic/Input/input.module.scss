@@ -2,6 +2,12 @@
 
 .wrapper {
   position: relative;
+
+  &:hover {
+    .crossIcon {
+      opacity: 1;
+    }
+  }
 }
 
 .label {
@@ -48,4 +54,14 @@
   margin-bottom: -8px;
 
   cursor: pointer;
+}
+
+.crossIcon {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  cursor: pointer;
+  opacity: 0;
+
+  transition: opacity .4s;
 }

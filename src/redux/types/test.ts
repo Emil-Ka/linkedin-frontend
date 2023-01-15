@@ -16,5 +16,3 @@ export interface IAddTestData {
   time: number;
   desc: string;
 }
-
-export type IAddTestRequest = FormData;

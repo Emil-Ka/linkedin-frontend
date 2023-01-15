@@ -1,4 +1,5 @@
 @import '../../design/share.scss';
+@import '../../design/fonts.scss';
 
 .page {
   @extend %pageForm;
@@ -51,4 +52,16 @@
 
 .addOption {
   width: fit-content;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  @include caption-2-medium($color: var(--errorColor));
 }

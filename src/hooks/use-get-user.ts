@@ -35,7 +35,7 @@ export const useGetUser: UseGetUserHookType = (params = defaultParams) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { setUser } = bindActionCreators({ setUser: userSlice.setUser }, dispatch);
-  const { user } = useTypedSelector((state) => state.user);
+  const user = useTypedSelector((state) => state.user.user);
 
   const [getUser, { data: userData, isLoading, error, isUninitialized, isFetching }] =
     useLazyGetUserQuery();
@@ -51,7 +51,6 @@ export const useGetUser: UseGetUserHookType = (params = defaultParams) => {
 
   useEffect(() => {
     if (userData) {
-      console.log('user', userData);
       setUser({ user: userData });
     }
     // eslint-disable-next-line

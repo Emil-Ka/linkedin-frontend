@@ -11,7 +11,7 @@ import { useLazyGetTestQuery } from '../../redux/api/test';
 import { useLazyGetOptionsQuery } from '../../redux/api/option';
 import { useCheckAnswerMutation } from '../../redux/api/answer';
 import { minToMs, minToSec } from '../../services';
-import { IAnswerRequest } from '../../redux/types/answer';
+import { ICheckAnswerRequest } from '../../redux/types/answer';
 import { QuestionParamsType } from './types';
 import cowboySrc from './assets/cowboy.png';
 import sadSrc from './assets/sad.png';
@@ -19,7 +19,7 @@ import sadSrc from './assets/sad.png';
 import styles from './test-page.module.scss';
 
 export const TestPage = () => {
-  const { register, getValues } = useForm<IAnswerRequest>();
+  const { register, getValues } = useForm<ICheckAnswerRequest>();
   const { id: testId } = useParams<QuestionParamsType>();
   const { t } = useTranslation();
 

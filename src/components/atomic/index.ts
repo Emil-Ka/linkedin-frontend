@@ -9,3 +9,4 @@ export * from './CustomLink';
 export * from './Textarea';
 export * from './Timer';
 export * from './FileInput';
+export * from './Notification';

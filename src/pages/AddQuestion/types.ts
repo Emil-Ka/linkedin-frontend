@@ -1,16 +1,17 @@
 export interface ITestOption {
-  value: string | number;
+  value: number;
   label: string;
+}
+
+export interface IOption {
+  _id: number;
+  value: string;
 }
 
 export interface IAddQuestionData {
   test: ITestOption['value'];
   question: string;
   cover: FileList;
-  answer: string;
-}
-
-export interface IOption {
-  id: number;
-  value: string;
+  answer: string; // IOption['_id'] to string
+  options: IOption[];
 }

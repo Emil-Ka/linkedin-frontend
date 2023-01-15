@@ -1,4 +1,4 @@
-import { IAddTestRequest, IGetTestRequest, IGetTestResponse } from '../types/test';
+import { IGetTestRequest, IGetTestResponse } from '../types/test';
 import { baseApi } from './index';
 
 export const testApi = baseApi.injectEndpoints({
@@ -7,18 +7,20 @@ export const testApi = baseApi.injectEndpoints({
       query: () => ({
         url: '/tests',
       }),
+      providesTags: ['Tests'],
     }),
     getTest: build.query<IGetTestResponse, IGetTestRequest>({
       query: ({ id }) => ({
         url: `/tests/${id}`,
       }),
     }),
-    addTest: build.mutation<IGetTestResponse, IAddTestRequest>({
+    addTest: build.mutation<IGetTestResponse, FormData>({
       query: (body) => ({
         url: '/tests/create/',
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Tests'],
     }),
   }),
 });

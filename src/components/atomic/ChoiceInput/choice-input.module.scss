@@ -1,11 +1,22 @@
 @import "../../../design/fonts.scss";
 
-.marker {
-  cursor: pointer;
+.wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
 
-  border: none;
-  background: none;
-  outline: 1px solid var(--sky-60);
+  @include text-regular();
+}
+
+.input {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  margin: 0;
+  outline: 2px solid var(--sky-60);
+  border-radius: 50%;
+  position: relative;
+  transition: outline .2s;
 
   &_size_s {
     min-width: 16px;
@@ -24,60 +35,39 @@
   &_box {
     border-radius: 6px;
   }
-}
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  &:hover {
-    /* Стили маркеров при наведении на весь блок radioButton */
-    :not(input:disabled, input:checked) + .marker {
-      /* Стили базового маркера, если он НЕ disabled и НЕ checked */
-      outline: 1px solid var(--blueColor);
-    }
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    bottom: 15%;
+    width: 70%;
+    height: 70%;
+    transition: background .2s;
   }
 
-  @include text-regular();
-}
+  &_round::before {
+    border-radius: 50%;
+  }
 
-.input {
-  display: none;
+  &_box::before {
+    border-radius: 6px;
+  }
 
   &:checked {
-    /* Стили для маркеров, когда input checked */
-    & + .marker {
-      position: relative;
+    outline: 2px solid var(--blueColor);
+  }
 
-      outline: 1px solid var(--blueColor);
-
-      &::before {
-        position: absolute;
-        top: 15%;
-        left: 15%;
-        right: 15%;
-        bottom: 15%;
-
-        width: 70%;
-        height: 70%;
-
-        content: "";
-
-        border-radius: 6px;
-        background: var(--blueColor);
-      }
-    }
+  &:checked::before {
+    background: var(--blueColor);
   }
 }
 
-.labelWrapper {
-  display: flex;
-  align-items: center;
-}
 
 .label {
-  /* Стиль ярлыка */
   cursor: pointer;
   transition: color 0.1s ease-in-out;
 
@@ -88,4 +78,12 @@
   &:hover {
     color: var(--sky-100);
   }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  @include caption-2-medium($color: var(--errorColor));
 }

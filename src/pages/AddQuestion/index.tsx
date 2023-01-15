@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import cn from 'classnames';
 
-import { Button, ChoiceInput, FileInput, Input, Page } from '../../components';
+import { Button, ChoiceInput, FileInput, Input, Notification, Page } from '../../components';
 import { useGetUser } from '../../hooks';
 import { USER_ROLE } from '../../redux/types/user';
 import { useGetTestsQuery } from '../../redux/api/test';
@@ -12,39 +12,97 @@ import { IAddQuestionData, ITestOption, IOption } from './types';
 import { IGetTestResponse } from '../../redux/types/test';
 
 import styles from './add-question.module.scss';
-
-const defaultOptions: IOption[] = [
-  {
-    id: 1,
-    value: '',
-  },
-];
+import { useAddQuestionMutation } from '../../redux/api/question';
+import { convertData } from '../../services';
+import { useAddOptionMutation } from '../../redux/api/option';
+import { IOptionResponse } from '../../redux/types/option';
+import { useAddAnswerMutation } from '../../redux/api/answer';
 
 export const AddQuestion = () => {
   const { t } = useTranslation();
-  const { isLoading } = useGetUser({
-    role: USER_ROLE.ADMIN,
-  });
+  const { isLoading } = useGetUser({ role: USER_ROLE.ADMIN });
 
   const {
     register,
     control,
     handleSubmit,
     reset,
-    watch,
     formState: { errors, isValid },
-  } = useForm<IAddQuestionData>();
+  } = useForm<IAddQuestionData>({
+    defaultValues: {
+      options: [
+        {
+          _id: 0,
+          value: '',
+        },
+      ],
+    },
+    mode: 'all',
+  });
 
-  const watcher = watch();
+  const {
+    fields: options,
+    append,
+    remove,
+    // @ts-ignore
+  } = useFieldArray<IAddQuestionData, keyof IAddQuestionData>({
+    control,
+    name: 'options',
+  });
+
   const { data: tests, isLoading: isTestsLoading } = useGetTestsQuery();
 
-  const [testOptions, setTestOptions] = useState<ITestOption[]>();
-  const [optionOptions, setOptionOptions] = useState<IOption[]>(defaultOptions);
-  const [answer, setAnswer] = useState<string>();
+  const [addQuestion, { isLoading: isAddQuestionLoading, isSuccess: isQuestionSuccess }] =
+    useAddQuestionMutation();
 
-  useEffect(() => {
-    console.log(watcher);
-  }, [watcher]);
+  const [addOption, { isLoading: isAddOptionLoading, isSuccess: isOptionSuccess }] =
+    useAddOptionMutation();
+
+  const [addAnswer, { isLoading: isAnswerLoading, isSuccess: isAnswerSuccess }] =
+    useAddAnswerMutation();
+
+  const [testOptions, setTestOptions] = useState<ITestOption[]>();
+
+  const addOptionField = () => {
+    append({
+      _id: options.length,
+      value: '',
+    } as never);
+  };
+
+  const onSubmit = async (data: IAddQuestionData) => {
+    const answerText = data.options.filter((option) => option._id === parseInt(data.answer, 10))[0]
+      .value;
+    const createdOptions: IOptionResponse[] = [];
+
+    const question = await addQuestion(convertData.addQuestion(data)).unwrap();
+
+    await Promise.all<Promise<void>[]>(
+      data.options.map(async (option) => {
+        const createdOption = await addOption(
+          convertData.addOption({
+            value: option.value,
+            question: question.id,
+          }),
+        ).unwrap();
+
+        createdOptions.push(createdOption);
+      }),
+    );
+
+    await Promise.all<Promise<void>>(
+      createdOptions.map(async (createdOption) => {
+        if (createdOption.text === answerText) {
+          addAnswer({
+            option: createdOption.id,
+            question: question.id,
+          }).unwrap();
+        }
+      }),
+    );
+
+    reset();
+  };
 
   useEffect(() => {
     if (tests) {
@@ -57,48 +115,20 @@ export const AddQuestion = () => {
     }
   }, [tests]);
 
-  const onSubmit = (data: IAddQuestionData) => {
-    console.log('data', data);
-    console.log('options', optionOptions);
-  };
-
-  const handleOption = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
-    setOptionOptions((prev) =>
-      prev.map((option) => {
-        if (option.id === id) {
-          return {
-            id,
-            value: e.target.value,
-          };
-        }
-
-        return option;
-      }),
-    );
-  };
-
-  const addOption = () => {
-    setOptionOptions((options) => [
-      ...options,
-      {
-        id: options.length + 1,
-        value: '',
-      },
-    ]);
-  };
-
-  const handleAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAnswer(e.target.value);
-    console.log(answer);
-  };
-
-  if (isLoading) {
+  if (isLoading || isAddQuestionLoading || isAddOptionLoading || isAnswerLoading) {
     return <span>Loading...</span>;
   }
 
   return (
     testOptions && (
       <Page className={styles.page}>
+        <Notification
+          isVisible={isQuestionSuccess && isOptionSuccess && isAnswerSuccess}
+          time={10_000}
+          status="success"
+        >
+          {t('add_question.notifications.success')!}
+        </Notification>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* @ts-ignore */}
           <Controller
@@ -109,17 +139,22 @@ export const AddQuestion = () => {
               required: t('utils.errors.required')!,
             }}
             render={({ field }) => (
-              <Select
-                ref={field.ref}
-                options={testOptions}
-                value={testOptions.filter((option) => option.value === field.value)}
-                onChange={(val) => {
-                  field.onChange(val?.value);
-                }}
-                placeholder={t('add_question.placeholders.test')}
-                isLoading={isTestsLoading}
-                isSearchable
-              />
+              <div className={styles.selectWrapper}>
+                <Select
+                  // @ts-ignore
+                  ref={field.ref}
+                  options={testOptions}
+                  value={testOptions.filter((option) => option.value === field.value)}
+                  onChange={(val) => {
+                    field.onChange(val?.value);
+                  }}
+                  onBlur={field.onBlur}
+                  placeholder={t('add_question.placeholders.test')}
+                  isLoading={isTestsLoading}
+                  isSearchable
+                />
+                <span className={styles.error}>{errors.test?.message}</span>
+              </div>
             )}
           />
           <Input
@@ -136,29 +171,32 @@ export const AddQuestion = () => {
             {...register('cover')}
             error={errors.cover}
           />
-          {optionOptions.map((option, index) => (
-            <div key={option.id} className={styles.option}>
+          {options.map((option, index) => (
+            <div key={(option as IOption)._id} className={styles.option}>
               <Input
                 className={styles.optionInput}
                 label={index === 0 ? t('add_question.labels.option')! : null}
-                onChange={(e) => handleOption(e, option.id)}
-                value={option.value}
+                handleDelete={index !== 0 ? () => remove(index) : null}
+                {...register(`options.${index}.value`, {
+                  required: t('add_question.errors.option')!,
+                })}
+                error={errors.options?.[index]?.value}
               />
               <ChoiceInput
                 className={cn(styles.optionRadio, {
                   [styles.optionRadio_first]: index === 0,
                 })}
-                name="answer"
-                value={answer}
-                onChange={handleAnswer}
-                // {...register('answer')}
                 type="radio"
+                value={(option as IOption)._id}
                 variant="box"
                 size="l"
+                {...register('answer', {
+                  required: t('utils.errors.required')!,
+                })}
               />
             </div>
           ))}
-          <Button onClick={addOption} className={styles.addOption}>
+          <Button onClick={addOptionField} className={styles.addOption}>
             {t('add_question.buttons.add_option')}
           </Button>
           <Button type="submit" disabled={!isValid}>
