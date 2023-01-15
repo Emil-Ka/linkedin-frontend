@@ -11,7 +11,7 @@ import { ITestData } from './types';
 import { useAddTestMutation } from '../../redux/api/test';
 
 import styles from './add-test.module.scss';
-import { convertApiData } from '../../services';
+import { convertData } from '../../services';
 
 export const AddTest = () => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ export const AddTest = () => {
   });
 
   const onSubmit = async (data: ITestData) => {
-    await addTest(convertApiData.addTest(data)).unwrap();
+    await addTest(convertData.addTest(data)).unwrap();
     reset();
   };
 
@@ -41,8 +41,8 @@ export const AddTest = () => {
 
   return (
     <Page className={styles.page}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <h1 className={styles.title}>{t('add_test.title')}</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>{t('add_test.title')}</h1>
         <Input
           label={t('add_test.labels.name')!}
           placeholder={t('add_test.placeholders.name')!}

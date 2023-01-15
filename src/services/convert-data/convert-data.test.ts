@@ -1,9 +1,9 @@
-import { convertApiData } from '.';
+import { convertData } from '.';
 
 describe('Проверка правильности конвертации данных для запроса регистрации', () => {
   test('пустые поля', () => {
     expect(
-      convertApiData.registration({
+      convertData.registration({
         first_name: '',
         last_name: '',
         email: '',
@@ -21,7 +21,7 @@ describe('Проверка правильности конвертации да�
 
   test('заполненные поля', () => {
     expect(
-      convertApiData.registration({
+      convertData.registration({
         first_name: 'Max',
         last_name: 'Boiler',
         email: 'max@boiler.com',
@@ -39,7 +39,7 @@ describe('Проверка правильности конвертации да�
 
   test('пользователь - HR', () => {
     expect(
-      convertApiData.registration({
+      convertData.registration({
         first_name: 'Max',
         last_name: 'Boiler',
         email: 'max@boiler.com',
@@ -57,7 +57,7 @@ describe('Проверка правильности конвертации да�
 
   test('isHR не задан в форме регистрации', () => {
     expect(
-      convertApiData.registration({
+      convertData.registration({
         first_name: 'Max',
         last_name: 'Boiler',
         email: 'max@boiler.com',

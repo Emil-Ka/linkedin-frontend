@@ -1,5 +1,9 @@
 @import '../../../design/fonts.scss';
 
+.content {
+  position: relative;
+}
+
 .label {
   display: block;
   margin-bottom: 8px;

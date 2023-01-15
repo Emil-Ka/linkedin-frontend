@@ -3,4 +3,14 @@
 body {
   font-family: 'Rubik', sans-serif;
   background: var(--bgColor);
+  position: relative;
+}
+
+#modal {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

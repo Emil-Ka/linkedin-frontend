@@ -13,6 +13,7 @@ import {
   TestPage,
   Result,
   AddTest,
+  AddQuestion,
 } from './index';
 import { PATHS } from '../constants/paths';
 
@@ -60,6 +61,10 @@ const routes: RouteObject[] = [
   {
     path: PATHS.ADD_TEST,
     element: <AddTest />,
+  },
+  {
+    path: PATHS.ADD_QUESTION,
+    element: <AddQuestion />,
   },
 ];
 

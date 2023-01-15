@@ -4,7 +4,7 @@ import { TagDescription } from '@reduxjs/toolkit/dist/query';
 import { baseQueryWithReauth } from '../services/base-query';
 import { store } from '../store';
 
-const tags = ['Resume', 'PassedTests'] as const;
+const tags = ['Resume', 'PassedTests', 'Tests'] as const;
 
 export const baseApi = createApi({
   reducerPath: 'api',

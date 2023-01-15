@@ -1,68 +1,89 @@
 @import "../../../design/fonts.scss";
 
-.marker {
-  min-width: 16px;
-  min-height: 16px;
-
-  /* Стиль стандартного маркера */
-  cursor: pointer;
-
-  border-radius: 50%;
-  outline: 1px solid var(--sky-60);
-}
-
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  &:hover {
-    /* Стили маркеров при наведении на весь блок radioButton */
-    :not(input:disabled, input:checked) + .marker {
-      /* Стили базового маркера, если он НЕ disabled и НЕ checked */
-      outline: 1px solid var(--blueColor);
-    }
-  }
+  position: relative;
 
   @include text-regular();
 }
 
 .input {
-  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  margin: 0;
+  outline: 2px solid var(--sky-60);
+  border-radius: 50%;
+  position: relative;
+  transition: outline .2s;
+
+  &_size_s {
+    min-width: 16px;
+    min-height: 16px;
+  }
+
+  &_size_l {
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  &_round {
+    border-radius: 50%;
+  }
+
+  &_box {
+    border-radius: 6px;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    right: 15%;
+    bottom: 15%;
+    width: 70%;
+    height: 70%;
+    transition: background .2s;
+  }
+
+  &_round::before {
+    border-radius: 50%;
+  }
+
+  &_box::before {
+    border-radius: 6px;
+  }
 
   &:checked {
-    /* Стили для маркеров, когда input checked */
-    & + .marker {
-      position: relative;
+    outline: 2px solid var(--blueColor);
+  }
 
-      border-radius: 50%;
-      outline: 1px solid var(--blueColor);
-
-      &::before {
-        position: absolute;
-        top: 4px;
-        left: 4px;
-
-        width: 8px;
-        height: 8px;
-
-        content: "";
-
-        border-radius: 50%;
-        background: var(--blueColor);
-      }
-    }
+  &:checked::before {
+    background: var(--blueColor);
   }
 }
 
+
 .label {
-  /* Стиль ярлыка */
   cursor: pointer;
   transition: color 0.1s ease-in-out;
+
+  margin-left: 10px;
 
   color: var(--sky-80);
 
   &:hover {
     color: var(--sky-100);
   }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  @include caption-2-medium($color: var(--errorColor));
 }

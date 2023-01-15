@@ -6,18 +6,29 @@ import { IChoiceInputProps } from './choice-input.props';
 import styles from './choice-input.module.scss';
 
 export const ChoiceInput = forwardRef<HTMLInputElement, IChoiceInputProps>(
-  ({ label, type, className, ...props }, ref: ForwardedRef<HTMLInputElement>) => {
+  (
+    { label, className, error, variant = 'round', size = 's', ...props },
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
     const id = useId();
 
     return (
       <div className={cn(styles.wrapper, className)}>
-        <input className={styles.input} ref={ref} id={id} type={type} {...props} />
-        <div className={styles.marker} />
+        <input
+          className={cn(styles.input, styles[`input_size_${size}`], {
+            [styles.input_round]: variant === 'round',
+            [styles.input_box]: variant === 'box',
+          })}
+          ref={ref}
+          id={id}
+          {...props}
+        />
         {label && (
           <label className={styles.label} htmlFor={id}>
             {label}
           </label>
         )}
+        {error && <span className={styles.error}>{error.message}</span>}
       </div>
     );
   },

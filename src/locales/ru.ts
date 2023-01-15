@@ -136,4 +136,26 @@ export const ru = {
       upload_files: 'загрузите фотографии',
     },
   },
+  add_question: {
+    placeholders: {
+      test: 'Выберете тест',
+      question: 'Что такое React?',
+    },
+    buttons: {
+      submit: 'Создать вопрос',
+      add_option: '+ добавить вариант ответа',
+    },
+    labels: {
+      question: 'Текст вопроса',
+      image: 'Картинка для вопроса',
+      option: 'Варианты ответов',
+    },
+    errors: {
+      option: 'Заполните либо удалите это поле',
+      answer: 'Выберете правильный вариант ответа',
+    },
+    notifications: {
+      success: 'Вопрос успешно создан',
+    },
+  },
 };

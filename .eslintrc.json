@@ -43,7 +43,8 @@
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/ban-ts-comment": "off",
       "no-param-reassign": "off",
-      "camelcase": "warn"
+      "camelcase": "warn",
+      "no-underscore-dangle":  ["error", { "allow": ["_id"] }]
     },
     "settings": {
       "import/resolver": {

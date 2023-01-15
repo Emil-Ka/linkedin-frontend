@@ -1,9 +1,14 @@
-import { IAnswerRequest, IAnswerResponse, ICheckAnswerResponse } from '../types/answer';
+import {
+  IAddAnswerRequest,
+  ICheckAnswerRequest,
+  IAnswerResponse,
+  ICheckAnswerResponse,
+} from '../types/answer';
 import { baseApi } from './index';
 
 export const answerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    checkAnswer: build.mutation<ICheckAnswerResponse, IAnswerRequest>({
+    checkAnswer: build.mutation<ICheckAnswerResponse, ICheckAnswerRequest>({
       query: (body) => ({
         url: '/answers/check/',
         method: 'POST',
@@ -15,7 +20,14 @@ export const answerApi = baseApi.injectEndpoints({
         url: '/answers',
       }),
     }),
+    addAnswer: build.mutation<IAnswerResponse[], IAddAnswerRequest>({
+      query: (body) => ({
+        url: '/answers/create/',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useCheckAnswerMutation, useGetAnswersQuery } = answerApi;
+export const { useCheckAnswerMutation, useGetAnswersQuery, useAddAnswerMutation } = answerApi;

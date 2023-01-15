@@ -7,3 +7,8 @@ export interface IOptionResponse {
 export interface IOptionRequest {
   questionId: number;
 }
+
+export interface IAddOptionRequest {
+  text: string;
+  question: number;
+}

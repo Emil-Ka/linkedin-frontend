@@ -9,3 +9,4 @@ export * from './TestsPage';
 export * from './TestPage';
 export * from './Result';
 export * from './AddTest';
+export * from './AddQuestion';
