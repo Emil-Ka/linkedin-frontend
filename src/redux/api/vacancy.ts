@@ -2,8 +2,8 @@ import {
   IVacanciesResponse,
   IVacanciesQueries,
   IVacancy,
-  IVacancyParams,
   IVacancyRequest,
+  IGetVacancyRequest,
 } from '../types/vacancies';
 import { baseApi } from './index';
 
@@ -14,7 +14,7 @@ export const vacancyApi = baseApi.injectEndpoints({
         url: `/vacancies?page=${page}&page_size=${pageSize}`,
       }),
     }),
-    getVacancy: build.query<IVacancy, IVacancyParams>({
+    getVacancy: build.query<IVacancy, IGetVacancyRequest>({
       query: ({ id }) => ({
         url: `/vacancies/${id}`,
       }),
@@ -29,4 +29,4 @@ export const vacancyApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetVacanciesQuery, useGetVacancyQuery, useAddVacancyMutation } = vacancyApi;
+export const { useGetVacanciesQuery, useLazyGetVacancyQuery, useAddVacancyMutation } = vacancyApi;

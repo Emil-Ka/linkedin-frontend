@@ -14,6 +14,9 @@ import {
   Result,
   AddTest,
   AddQuestion,
+  AddResume,
+  Resume,
+  Admin,
 } from './index';
 import { PATHS } from '../constants/paths';
 
@@ -65,6 +68,18 @@ const routes: RouteObject[] = [
   {
     path: PATHS.ADD_QUESTION,
     element: <AddQuestion />,
+  },
+  {
+    path: PATHS.ADD_RESUME,
+    element: <AddResume />,
+  },
+  {
+    path: PATHS.RESUME_ID,
+    element: <Resume />,
+  },
+  {
+    path: PATHS.ADMIN,
+    element: <Admin />,
   },
 ];
 

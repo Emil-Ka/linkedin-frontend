@@ -33,11 +33,11 @@ export const Result: FC = () => {
   const { data: answers } = useGetAnswersQuery();
 
   const getOptionIdByQuestionId = (questionId: number) => {
-    return answers?.filter(({ question }) => question === questionId)[0].option;
+    return answers?.filter(({ question }) => question === questionId)[0]?.option;
   };
 
   const getSelectedOptionIdByQuestionId = (questionId: number) => {
-    return results?.filter(({ question }) => question === questionId)[0].option;
+    return results?.filter(({ question }) => question === questionId)[0]?.option;
   };
 
   useEffect(() => {

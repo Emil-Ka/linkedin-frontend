@@ -52,6 +52,5 @@
           "extensions": [".js", ".jsx", ".ts", ".tsx"]
         }
       }
-    },
-    "ignorePatterns": ["webpack.config.ts", "dist/*"]
+    }
 }

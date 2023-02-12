@@ -10,3 +10,6 @@ export * from './TestPage';
 export * from './Result';
 export * from './AddTest';
 export * from './AddQuestion';
+export * from './AddResume';
+export * from './Resume';
+export * from './Admin';
