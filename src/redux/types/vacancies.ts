@@ -37,8 +37,8 @@ export interface IVacanciesQueries {
   pageSize?: number;
 }
 
-export type IVacancyParams = {
-  id?: string;
+export interface IGetVacancyRequest {
+  id: number;
 }
 
 export type IVacancyRequest = Omit<IVacancy, 'id' | 'user'>;

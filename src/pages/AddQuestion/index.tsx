@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Select from 'react-select';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import cn from 'classnames';
 
-import { Button, ChoiceInput, FileInput, Input, Notification, Page } from '../../components';
+import {
+  Button,
+  ChoiceInput,
+  FileInput,
+  Input,
+  Notification,
+  Page,
+  Select,
+} from '../../components';
 import { useGetUser } from '../../hooks';
 import { USER_ROLE } from '../../redux/types/user';
 import { useGetTestsQuery } from '../../redux/api/test';
 import { IAddQuestionData, ITestOption, IOption } from './types';
-import { IGetTestResponse } from '../../redux/types/test';
 
 import styles from './add-question.module.scss';
 import { useAddQuestionMutation } from '../../redux/api/question';
@@ -120,17 +126,18 @@ export const AddQuestion = () => {
   }
 
   return (
-    testOptions && (
-      <Page className={styles.page}>
-        <Notification
-          isVisible={isQuestionSuccess && isOptionSuccess && isAnswerSuccess}
-          time={10_000}
-          status="success"
-        >
-          {t('add_question.notifications.success')!}
-        </Notification>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* @ts-ignore */}
+    <Page className={styles.page}>
+      <Notification
+        isVisible={isQuestionSuccess && isOptionSuccess && isAnswerSuccess}
+        time={10_000}
+        status="success"
+      >
+        {t('add_question.notifications.success')!}
+      </Notification>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>{t('add_question.title')}</h1>
+        {testOptions ? (
+          // @ts-ignore
           <Controller
             control={control}
             name="test"
@@ -141,7 +148,6 @@ export const AddQuestion = () => {
             render={({ field }) => (
               <div className={styles.selectWrapper}>
                 <Select
-                  // @ts-ignore
                   ref={field.ref}
                   options={testOptions}
                   value={testOptions.filter((option) => option.value === field.value)}
@@ -157,53 +163,53 @@ export const AddQuestion = () => {
               </div>
             )}
           />
-          <Input
-            label={t('add_question.labels.question')!}
-            placeholder={t('add_question.placeholders.question')!}
-            {...register('question', {
-              required: t('utils.errors.required')!,
-            })}
-            error={errors.question}
-          />
-          <FileInput
-            accept="image/png, image/jpeg, image/svg"
-            label={t('add_question.labels.image')!}
-            {...register('cover')}
-            error={errors.cover}
-          />
-          {options.map((option, index) => (
-            <div key={(option as IOption)._id} className={styles.option}>
-              <Input
-                className={styles.optionInput}
-                label={index === 0 ? t('add_question.labels.option')! : null}
-                handleDelete={index !== 0 ? () => remove(index) : null}
-                {...register(`options.${index}.value`, {
-                  required: t('add_question.errors.option')!,
-                })}
-                error={errors.options?.[index]?.value}
-              />
-              <ChoiceInput
-                className={cn(styles.optionRadio, {
-                  [styles.optionRadio_first]: index === 0,
-                })}
-                type="radio"
-                value={(option as IOption)._id}
-                variant="box"
-                size="l"
-                {...register('answer', {
-                  required: t('utils.errors.required')!,
-                })}
-              />
-            </div>
-          ))}
-          <Button onClick={addOptionField} className={styles.addOption}>
-            {t('add_question.buttons.add_option')}
-          </Button>
-          <Button type="submit" disabled={!isValid}>
-            {t('add_question.buttons.submit')}
-          </Button>
-        </form>
-      </Page>
-    )
+        ) : null}
+        <Input
+          label={t('add_question.labels.question')!}
+          placeholder={t('add_question.placeholders.question')!}
+          {...register('question', {
+            required: t('utils.errors.required')!,
+          })}
+          error={errors.question}
+        />
+        <FileInput
+          accept="image/png, image/jpeg, image/svg"
+          label={t('add_question.labels.image')!}
+          {...register('cover')}
+          error={errors.cover}
+        />
+        {options.map((option, index) => (
+          <div key={(option as IOption)._id} className={styles.option}>
+            <Input
+              className={styles.optionInput}
+              label={index === 0 ? t('add_question.labels.option')! : null}
+              handleDelete={index !== 0 ? () => remove(index) : null}
+              {...register(`options.${index}.value`, {
+                required: t('add_question.errors.option')!,
+              })}
+              error={errors.options?.[index]?.value}
+            />
+            <ChoiceInput
+              className={cn(styles.optionRadio, {
+                [styles.optionRadio_first]: index === 0,
+              })}
+              type="radio"
+              value={(option as IOption)._id}
+              variant="box"
+              size="l"
+              {...register('answer', {
+                required: t('utils.errors.required')!,
+              })}
+            />
+          </div>
+        ))}
+        <Button onClick={addOptionField} className={styles.addOption}>
+          {t('add_question.buttons.add_option')}
+        </Button>
+        <Button type="submit" disabled={!isValid}>
+          {t('add_question.buttons.submit')}
+        </Button>
+      </form>
+    </Page>
   );
 };

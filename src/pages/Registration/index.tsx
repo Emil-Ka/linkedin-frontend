@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { bindActionCreators } from '@reduxjs/toolkit';
@@ -24,7 +24,6 @@ export const initRegistrationState: IRegistrationInitData = {
 };
 
 export const Registration: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const { t } = useTranslation();
   const [error, setError] = useState<string[] | null>(null);

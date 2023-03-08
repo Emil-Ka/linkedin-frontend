@@ -53,9 +53,9 @@ export const Account = () => {
   }, [passedTests]);
 
   return (
-    user && (
-      <Page>
-        <Container className={styles.content}>
+    <Page>
+      <Container className={styles.content}>
+        {user && (
           <Card className={styles.preview}>
             <img src={peviewImg} alt="preview-img" className={styles.previewImg} />
             <img
@@ -70,59 +70,59 @@ export const Account = () => {
               <p className={styles.desc}>{user.bio}</p>
             </div>
           </Card>
-          {resumes && (
-            <Card className={styles.resume}>
-              <h2 className={styles.label}>{t('account.titles.resumes')}</h2>
-              <div className={styles.list}>
-                {resumes.map(({ id, title, salary }) => (
-                  <Card key={id} className={styles.card}>
-                    <h3 className={styles.resumeTitle}>{title}</h3>
-                    <b className={styles.resumeSalary}>
-                      {salary ? priceRu(salary) : t('account.text.salary')}
-                    </b>
-                    <CustomLink
-                      className={styles.resumeBtn}
-                      type="button"
-                      to={`${PATHS.RESUME}/${id}`}
-                    >
-                      {t('account.links.more')}
-                    </CustomLink>
-                  </Card>
-                ))}
-                <Link to={PATHS.ADD_RESUME}>
-                  <Card className={styles.resumeAdd}>
-                    <PlusIcon className={styles.plusIcon} />
-                    <span>{t('account.links.add_resume')}</span>
-                  </Card>
-                </Link>
-              </div>
-            </Card>
-          )}
-          {tests.length ? (
-            <Card className={styles.passedTests}>
-              <h2 className={styles.label}>{t('account.titles.passed_tests')}</h2>
-              <div className={styles.list}>
-                {tests.map(({ test, passedTest }) => (
-                  <Card key={passedTest.id} className={styles.card}>
-                    <img src={test.cover} alt={test.name} className={styles.testCover} />
-                    <h3 className={styles.testTitle}>{test.name}</h3>
-                    <span className={styles.result}>
-                      {t('account.labels.result')} {passedTest.result} %
-                    </span>
-                    <CustomLink
-                      to={`${PATHS.RESULT}/${test.id}`}
-                      type="button"
-                      className={styles.testBtn}
-                    >
-                      {t('account.links.show_result')}
-                    </CustomLink>
-                  </Card>
-                ))}
-              </div>
-            </Card>
-          ) : null}
-        </Container>
-      </Page>
-    )
+        )}
+        {resumes && (
+          <Card className={styles.resume}>
+            <h2 className={styles.label}>{t('account.titles.resumes')}</h2>
+            <div className={styles.list}>
+              {resumes.map(({ id, title, salary }) => (
+                <Card key={id} className={styles.card}>
+                  <h3 className={styles.resumeTitle}>{title}</h3>
+                  <b className={styles.resumeSalary}>
+                    {salary ? priceRu(salary) : t('utils.salary')}
+                  </b>
+                  <CustomLink
+                    className={styles.resumeBtn}
+                    type="button"
+                    to={`${PATHS.RESUME}/${id}`}
+                  >
+                    {t('account.links.more')}
+                  </CustomLink>
+                </Card>
+              ))}
+              <Link to={PATHS.ADD_RESUME}>
+                <Card className={styles.resumeAdd}>
+                  <PlusIcon className={styles.plusIcon} />
+                  <span>{t('account.links.add_resume')}</span>
+                </Card>
+              </Link>
+            </div>
+          </Card>
+        )}
+        {tests.length ? (
+          <Card className={styles.passedTests}>
+            <h2 className={styles.label}>{t('account.titles.passed_tests')}</h2>
+            <div className={styles.list}>
+              {tests.map(({ test, passedTest }) => (
+                <Card key={passedTest.id} className={styles.card}>
+                  <img src={test.cover} alt={test.name} className={styles.testCover} />
+                  <h3 className={styles.testTitle}>{test.name}</h3>
+                  <span className={styles.result}>
+                    {t('account.labels.result')} {passedTest.result} %
+                  </span>
+                  <CustomLink
+                    to={`${PATHS.RESULT}/${test.id}`}
+                    type="button"
+                    className={styles.testBtn}
+                  >
+                    {t('account.links.show_result')}
+                  </CustomLink>
+                </Card>
+              ))}
+            </div>
+          </Card>
+        ) : null}
+      </Container>
+    </Page>
   );
 };

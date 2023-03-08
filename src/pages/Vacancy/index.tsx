@@ -2,27 +2,35 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Container, Page, Card } from '../../components';
-import { useGetVacancyQuery } from '../../redux/api/vacancy';
-import { IVacancyParams } from '../../redux/types/vacancies';
+import { useLazyGetVacancyQuery } from '../../redux/api/vacancy';
+import { priceRu } from '../../services';
+import { IVacancyParams } from './types';
 
 import styles from './vacancy.module.scss';
-import { priceRu } from '../../services';
 
 export const Vacancy = () => {
   const { id } = useParams<IVacancyParams>();
-  const { data, isLoading } = useGetVacancyQuery({ id });
+  const [getVacancy, { data: vacancy, isLoading }] = useLazyGetVacancyQuery();
+
+  useEffect(() => {
+    if (id) {
+      getVacancy({ id: parseInt(id, 10) });
+    }
+  }, [id]);
 
   return (
     <Page>
       <Container className={styles.content}>
-        <Card className={styles.card}>
-          <div className={styles.header}>
-            <h1 className={styles.title}>{data?.title}</h1>
-            <b className={styles.salary}>{data?.salary && priceRu(data.salary)}</b>
-          </div>
-          <h2 className={styles.companyName}>{data?.company_name}</h2>
-          <p className={styles.desc}>{data?.text}</p>
-        </Card>
+        {vacancy && (
+          <Card className={styles.card}>
+            <div className={styles.header}>
+              <h1 className={styles.title}>{vacancy.title}</h1>
+              <b className={styles.salary}>{priceRu(vacancy.salary)}</b>
+            </div>
+            <h2 className={styles.companyName}>{vacancy.company_name}</h2>
+            <p className={styles.desc}>{vacancy.text}</p>
+          </Card>
+        )}
       </Container>
     </Page>
   );

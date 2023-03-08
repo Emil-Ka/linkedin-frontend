@@ -5,3 +5,13 @@ export interface IResumeResponse {
   salary: number | null;
   user: number;
 }
+
+export interface IResumeRequest {
+  title: string;
+  text: string;
+  salary: number;
+}
+
+export interface IGetResumeRequest {
+  id: number;
+}

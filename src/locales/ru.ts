@@ -76,9 +76,6 @@ export const ru = {
     labels: {
       result: 'Результат:',
     },
-    text: {
-      salary: 'Зарплата не указана',
-    },
     links: {
       more: 'Подробнее',
       add_resume: 'Добавить резюме',
@@ -129,6 +126,7 @@ export const ru = {
     errors: {
       required: 'Это обязательное поле',
     },
+    salary: 'Зарплата не указана',
   },
   file_input: {
     labels: {
@@ -137,6 +135,7 @@ export const ru = {
     },
   },
   add_question: {
+    title: 'Создайте вопрос',
     placeholders: {
       test: 'Выберете тест',
       question: 'Что такое React?',
@@ -156,6 +155,24 @@ export const ru = {
     },
     notifications: {
       success: 'Вопрос успешно создан',
+    },
+  },
+  add_resume: {
+    title: 'Создайте резюме',
+    labels: {
+      title: 'Название резюме',
+      text: 'Описание резюме',
+      salary: 'Ожидаемая зарплата',
+    },
+    placeholders: {
+      title: 'Frontend разработчик',
+      salary: '50 000',
+    },
+    buttons: {
+      submit: 'Создать резюме',
+    },
+    notifications: {
+      success: 'Резюме успешно создано',
     },
   },
 };

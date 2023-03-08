@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { Modal } from '../../templates';
 import { INotificationProps } from './notification.props';
 import CrossIcon from './assets/cross.svg';
 import SuccessIcon from './assets/success.svg';
@@ -35,19 +34,17 @@ export const Notification: FC<INotificationProps> = ({
     // eslint-disable-next-line
   }, []);
 
-  return visible ? (
-    <Modal>
-      <Card
-        className={cn(styles.notification, className, {
-          [styles.notification_visible]: visible,
-        })}
-        {...props}
-      >
-        <DeleteIcon onClick={hideNotification} className={styles.delete} />
-        {status === 'success' && <SuccessIcon className={styles.icon} />}
-        {status === 'failed' && <CrossIcon className={styles.icon} />}
-        <p className={styles.text}>{children}</p>
-      </Card>
-    </Modal>
-  ) : null;
+  return (
+    <Card
+      className={cn(styles.notification, className, {
+        [styles.notification_visible]: visible,
+      })}
+      {...props}
+    >
+      <DeleteIcon onClick={hideNotification} className={styles.delete} />
+      {status === 'success' && <SuccessIcon className={styles.icon} />}
+      {status === 'failed' && <CrossIcon className={styles.icon} />}
+      <p className={styles.text}>{children}</p>
+    </Card>
+  );
 };

@@ -1,4 +1,4 @@
-import { IResumeResponse } from '../types/resume';
+import { IGetResumeRequest, IResumeRequest, IResumeResponse } from '../types/resume';
 import { baseApi } from './index';
 
 export const resumeApi = baseApi.injectEndpoints({
@@ -9,7 +9,19 @@ export const resumeApi = baseApi.injectEndpoints({
       }),
       providesTags: ['Resume'],
     }),
+    getResume: build.query<IResumeResponse, IGetResumeRequest>({
+      query: ({ id }) => ({
+        url: `/resumes/${id}`,
+      }),
+    }),
+    addResume: build.mutation<IResumeResponse, IResumeRequest>({
+      query: (body) => ({
+        url: '/resumes/create/',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetResumesQuery } = resumeApi;
+export const { useGetResumesQuery, useAddResumeMutation, useLazyGetResumeQuery } = resumeApi;
