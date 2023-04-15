@@ -1,0 +1,16 @@
+@import "app/design/fonts.scss";
+
+.logo {
+  display: block;
+
+  padding: 3px 7px;
+
+  text-decoration: none;
+
+  border-radius: 7px;
+  background: var(--nevaColor);
+}
+
+.label {
+  @include title-2-regular($color: var(--whiteColor), $weight: 500);
+}

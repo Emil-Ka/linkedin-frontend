@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "ESNext",
     "module": "umd",
     "lib": ["ESNext", "dom"],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noEmit": true,
     "sourceMap": true,
     /* Strict Type-Checking Options */

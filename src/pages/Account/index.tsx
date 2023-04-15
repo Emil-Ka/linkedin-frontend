@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { Link } from 'react-router-dom';
-import { Card, Container, CustomLink, Page } from '../../components';
-import { useGetUser } from '../../hooks';
-import { BACKEND_URL } from '../../config/backend.config';
+
+import { Card, Container, CustomLink, Page } from 'shared/ui';
+import { useGetUser } from 'shared/hooks';
+import { BACKEND_URL } from '../../shared/config/backend.config';
 import { useGetResumesQuery } from '../../redux/api/resume';
-import { priceRu } from '../../services';
-import { PATHS } from '../../constants/paths';
+import { priceRu } from '../../shared/lib';
+import { PATHS } from '../../shared/config/paths';
 import { useLazyGetPassedTestsQuery } from '../../redux/api/passed-test';
 import { useLazyGetTestQuery } from '../../redux/api/test';
 import { ITests } from './types';
@@ -17,6 +17,7 @@ import userImg from '../../assets/images/user.png';
 
 import styles from './account.module.scss';
 import { resetCacheByTag } from '../../redux/api';
+import { useLinks } from '../../shared/hooks/use-links';
 
 export const Account = () => {
   const { t } = useTranslation();

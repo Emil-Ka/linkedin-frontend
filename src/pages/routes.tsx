@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 
 import {
@@ -18,7 +17,7 @@ import {
   Resume,
   Admin,
 } from './index';
-import { PATHS } from '../constants/paths';
+import { PATHS } from '../shared/config/paths';
 
 const routes: RouteObject[] = [
   {
@@ -83,8 +82,4 @@ const routes: RouteObject[] = [
   },
 ];
 
-export const AppRouter = () => {
-  const component = useRoutes(routes);
-
-  return component;
-};
+export const AppRouter = () => useRoutes(routes);

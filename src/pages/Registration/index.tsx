@@ -7,11 +7,11 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import { Button, Input, ChoiceInput, Page, Error } from '../../components';
 import { useRegisterMutation } from '../../redux/api/user';
 import { IRegistrationInitData, instanceOfIErrorResponse } from '../../redux/types/user';
-import { convertData } from '../../services/convert-data';
+import { convertData } from '../../shared/lib/convert-data';
 import * as userSlice from '../../redux/slices/user';
 import { setCookie } from '../../models/cookie';
-import { useTypedDispatch } from '../../hooks';
-import { PATHS } from '../../constants/paths';
+import { useTypedDispatch } from '../../shared/hooks';
+import { PATHS } from '../../shared/config/paths';
 
 import styles from './registration.module.scss';
 

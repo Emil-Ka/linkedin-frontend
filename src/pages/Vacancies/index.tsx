@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { Button, Card, Container, CustomLink, Page } from '../../components';
-import { useGetUser } from '../../hooks';
+import { useGetUser } from '../../shared/hooks';
 import { useGetVacanciesQuery } from '../../redux/api/vacancy';
 
 import styles from './vacancies.module.scss';
 import { USER_ROLE } from '../../redux/types/user';
-import { PATHS } from '../../constants/paths';
-import { priceRu } from '../../services';
+import { PATHS } from '../../shared/config/paths';
+import { priceRu } from '../../shared/lib';
 
 export const Vacancies = () => {
   const { t } = useTranslation();

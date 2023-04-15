@@ -1,0 +1,39 @@
+@import "app/design/fonts.scss";
+
+.wrapper {
+  position: relative;
+}
+
+.label {
+  margin-bottom: 12px;
+
+  @include subhead-regular();
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+
+  resize: vertical;
+
+  border: 1px solid var(--borderInputColor);
+  border-radius: 6px;
+  background: var(--inputBg);
+
+  &:focus {
+    border: 1px solid var(--borderInputColorFocus);
+    outline: none;
+  }
+
+  &::placeholder {
+    @include text-regular($color: var(--placeholderColor));
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  @include caption-2-medium($color: var(--errorColor));
+}

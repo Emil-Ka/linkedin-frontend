@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Container, Page, Card } from '../../components';
 import { useLazyGetVacancyQuery } from '../../redux/api/vacancy';
-import { priceRu } from '../../services';
+import { priceRu } from '../../shared/lib';
 import { IVacancyParams } from './types';
 
 import styles from './vacancy.module.scss';

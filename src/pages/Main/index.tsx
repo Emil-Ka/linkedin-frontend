@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { useGetUser } from '../../hooks';
+import { useGetUser } from '../../shared/hooks';
 import { Page } from '../../components';
 
 export const Main: FC = () => {

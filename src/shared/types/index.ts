@@ -1,0 +1,1 @@
+export { Hoc } from './hoc';

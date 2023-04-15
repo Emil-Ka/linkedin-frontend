@@ -1,0 +1,67 @@
+@import 'app/design/share.scss';
+@import 'app/design/fonts.scss';
+
+.page {
+  @extend %pageForm;
+}
+
+.wrapper {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 14px;
+    height: 8px;
+    background-color: var(--blueColor);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  }
+}
+
+.select {
+  appearance: none;
+  border: 1px solid var(--sky-80);
+  border-radius: 8px;
+  padding: 6px 10px;
+  width: 100%;
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  gap: 10px;
+  position: relative;
+}
+
+.optionInput {
+  flex-grow: 1;
+  display: flex;
+}
+
+.optionRadio {
+  justify-self: flex-end;
+
+  &_first {
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+  }
+}
+
+.addOption {
+  width: fit-content;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+
+  @include caption-2-medium($color: var(--errorColor));
+}

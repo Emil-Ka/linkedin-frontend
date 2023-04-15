@@ -4,6 +4,7 @@ import * as webpackDevServer from 'webpack-dev-server';
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: webpack.Configuration = {
   entry: './src/main.tsx',
@@ -65,6 +66,7 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    plugins: [new TsConfigPathsPlugin()],
   },
   devServer: {
     static: [path.resolve(__dirname, 'dist')],

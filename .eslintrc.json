@@ -44,10 +44,12 @@
       "@typescript-eslint/ban-ts-comment": "off",
       "no-param-reassign": "off",
       "camelcase": "warn",
-      "no-underscore-dangle":  ["error", { "allow": ["_id"] }]
+      "no-underscore-dangle":  ["error", { "allow": ["_id"] }],
+      "react/react-in-jsx-scope": "off"
     },
     "settings": {
       "import/resolver": {
+        "typescript": {},
         "node": {
           "extensions": [".js", ".jsx", ".ts", ".tsx"]
         }

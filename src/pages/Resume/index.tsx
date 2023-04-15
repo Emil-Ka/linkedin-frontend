@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Container, Page } from '../../components';
 import { ResumeParams } from './types';
 import { useLazyGetResumeQuery } from '../../redux/api/resume';
-import { priceRu } from '../../services';
+import { priceRu } from '../../shared/lib';
 
 import styles from './resume.module.scss';
 

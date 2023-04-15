@@ -6,12 +6,12 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 
 import { Page, Error, Input, Button } from '../../components';
 import { ILoginData } from './types';
-import { useTypedDispatch } from '../../hooks';
+import { useTypedDispatch } from '../../shared/hooks';
 import { useLoginMutation } from '../../redux/api/user';
 import { instanceOfIErrorResponse } from '../../redux/types/user';
 import * as userSlice from '../../redux/slices/user';
 import { resetCookie, setCookie } from '../../models/cookie';
-import { PATHS } from '../../constants/paths';
+import { PATHS } from '../../shared/config/paths';
 
 import styles from './login.module.scss';
 

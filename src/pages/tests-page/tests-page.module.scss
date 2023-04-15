@@ -1,0 +1,57 @@
+@import "app/design/fonts.scss";
+
+.content {
+  padding: 40px 0 60px;
+}
+
+.tests {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.title {
+  margin-bottom: 40px;
+
+  text-align: center;
+
+  @include title-2-regular($weight: 500);
+}
+
+.link {
+  display: block;
+}
+
+.card {
+  display: grid;
+  grid-template-areas:
+    "cover name"
+    "cover desc";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 20px 30px;
+
+  padding: 20px;
+}
+
+.img {
+  width: 180px;
+  height: 150px;
+
+  border-radius: 4px;
+  grid-area: cover;
+  object-fit: cover;
+}
+
+.name {
+  grid-area: name;
+
+  @include title-4-medium($color: var(--blueColor), $weight: 600);
+}
+
+.desc {
+  max-width: 50%;
+
+  color: var(--sky-100);
+  grid-area: desc;
+}
